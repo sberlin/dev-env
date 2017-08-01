@@ -1,0 +1,22 @@
+configs:
+  use: "desktop"
+  desktop:
+    gui: true
+    username: "user"
+    password: "user"
+    hostname: "ubuntu-desktop-user"
+    usermail: "user@users.noreply.github.com"
+    usertools: "https://github.com/user/tools/archive/master.zip"
+    locale: "en_US.UTF-8"
+    keymap: "en"
+    timezone: "Europe/London"
+  server:
+    gui: false
+    username: "user"
+    password: "user"
+    hostname: "ubuntu-server-user"
+    usermail: "user@users.noreply.github.com"
+    usertools: "https://github.com/user/tools/archive/master.zip"
+    locale: "en_US.UTF-8"
+    keymap: "en"
+    timezone: "Europe/London"
