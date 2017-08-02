@@ -7,8 +7,7 @@ apt-get install --assume-yes \
     zip \
     build-essential \
     linux-headers-`uname -r` \
-    virtualbox-guest-dkms \
-    virtualbox-guest-utils
+    virtualbox-guest-dkms
 
 # Configure applications
 update-alternatives --set editor /usr/bin/vim.basic
@@ -33,7 +32,7 @@ fi
 if [ "$GUI" == "true" ]
 then
     apt-get install --assume-yes \
-        unity-tweak-tool \
         ubuntu-desktop \
-        virtualbox-guest-x11
+        virtualbox-guest-x11 \
+        unity-tweak-tool
 fi

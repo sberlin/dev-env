@@ -11,7 +11,7 @@ echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/99_$USERNAME
 chmod 440 /etc/sudoers.d/99_$USERNAME
 
 # Create workspace
-mkdir -p /opt/workspace/$USERNAME/git /home/$USERNAME/.config/autostart
+mkdir -p /opt/workspace/$USERNAME/{git,opt} /home/$USERNAME/.config/autostart
 ln -fs /opt/workspace/$USERNAME/git /home/$USERNAME/git
 
 # Set permissions
@@ -29,21 +29,21 @@ EOF
 echo "Create setup script at /home/$USERNAME/setup-user.sh"
 cat > /home/$USERNAME/setup-user.sh <<-'EOF'
 #!/bin/bash
-exec 2&>1 /home/$USERNAME/setup-user.log
+exec &> /home/$USERNAME/setup-user.log
 
 echo "Install configurations from archive"
 if [ -n "$USERTOOLS" ]
 then
-    pushd . 2&>1 /dev/null
+    pushd . &> /dev/null
     mkdir -p /tmp/vagrant-bootstrap
     cd /tmp/vagrant-bootstrap
     curl -o tools.zip -fsSL "$USERTOOLS" && \
         unzip -o tools.zip && \
-        pushd . 2&>1 /dev/null && \
+        pushd . &> /dev/null && \
         cd $(zipinfo -1 tools.zip | head -1) && \
         make install && \
-        popd 2&>1 /dev/null
-    popd 2&>1 /dev/null
+        popd &> /dev/null
+    popd &> /dev/null
     rm -rf /tmp/vagrant-bootstrap
 fi
 
@@ -70,5 +70,5 @@ echo "Set permissions for setup files"
 chmod +x /home/$USERNAME/.config/autostart/setup-user.desktop /home/$USERNAME/setup-user.sh
 chown --recursive $USERNAME:$USERNAME /home/$USERNAME/
 
-echo "Reset password"
+echo "Set predefined password"
 echo "$USERNAME:${PASSWORD:-$USERNAME}" | chpasswd
