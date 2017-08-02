@@ -47,20 +47,6 @@ then
     rm -rf /tmp/vagrant-bootstrap
 fi
 
-echo "Set user info for Git"
-git config --global user.name $USERNAME
-git config --global user.email $USERMAIL
-
-if [ "$GUI" == "true" ]
-then
-    echo "Set GUI configurations"
-    gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Ubuntu Bold 9'
-    gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 11'
-    gsettings set org.gnome.desktop.interface font-name 'Ubuntu 10'
-    gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'
-    gsettings set com.canonical.Unity.Launcher favorites "['application://org.gnome.Nautilus.desktop', 'application://firefox.desktop', 'application://org.gnome.gedit.desktop', 'application://org.gnome.Terminal.desktop', 'unity://running-apps', 'application://unity-control-center.desktop', 'application://unity-tweak-tool.desktop', 'unity://expo-icon', 'unity://devices']"
-fi
-
 echo "Remove setup scripts"
 rm "/home/$USERNAME/.config/autostart/setup-user.desktop"
 rm "$0"
