@@ -40,7 +40,7 @@ then
     curl -o tools.zip -fsSL "$USERTOOLS" && \
         unzip -o tools.zip && \
         pushd . &> /dev/null && \
-        cd $(zipinfo -1 tools.zip | head -1) && \
+        cd */ && \
         make install && \
         popd &> /dev/null
     popd &> /dev/null
