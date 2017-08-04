@@ -6,13 +6,13 @@ test -z "$USERNAME" && exit
 # User specific settings
 echo "Create user $USERNAME with groups"
 adduser --disabled-login --gecos "$USERNAME,,," --home /home/$USERNAME --shell /bin/bash $USERNAME
-id --groups --name vagrant | tr ' ' '\n' | tail -n +2 | xargs -I{} adduser $USERNAME {}
+id --groups --name vagrant | tr ' ' '\n' | tail --lines=+2 | xargs -I{} adduser $USERNAME {}
 echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/99_$USERNAME
 chmod 440 /etc/sudoers.d/99_$USERNAME
 
 # Create workspace
-mkdir -p /opt/workspace/$USERNAME/{git,opt} /home/$USERNAME/.config/autostart
-ln -fs /opt/workspace/$USERNAME/git /home/$USERNAME/git
+mkdir --parents /opt/workspace/$USERNAME/{git,opt} /home/$USERNAME/.config/autostart
+ln --force --symbolic /opt/workspace/$USERNAME/git /home/$USERNAME/git
 
 # Set permissions
 chown --recursive $USERNAME:$USERNAME /home/$USERNAME /opt/workspace/$USERNAME /home/$USERNAME/.config/autostart
@@ -37,7 +37,7 @@ then
     pushd . &> /dev/null
     mkdir -p /tmp/vagrant-bootstrap
     cd /tmp/vagrant-bootstrap
-    curl -o tools.zip -fsSL "$USERTOOLS" && \
+    curl --output tools.zip --fail --show-error --location "$USERTOOLS" && \
         unzip -o tools.zip && \
         pushd . &> /dev/null && \
         cd */ && \
