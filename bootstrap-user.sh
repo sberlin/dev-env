@@ -35,7 +35,7 @@ echo "Install configurations from archive"
 if [ -n "$USERTOOLS" ]
 then
     pushd . &> /dev/null
-    mkdir -p /tmp/vagrant-bootstrap
+    mkdir --parents /tmp/vagrant-bootstrap
     cd /tmp/vagrant-bootstrap
     curl --output tools.zip --fail --show-error --location "$USERTOOLS" && \
         unzip -o tools.zip && \
@@ -44,7 +44,7 @@ then
         make install && \
         popd &> /dev/null
     popd &> /dev/null
-    rm -rf /tmp/vagrant-bootstrap
+    rm --recursive --force /tmp/vagrant-bootstrap
 fi
 
 echo "Remove setup scripts"
