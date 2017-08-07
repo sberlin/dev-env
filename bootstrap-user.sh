@@ -31,9 +31,11 @@ cat > /home/$USERNAME/setup-user.sh <<-'EOF'
 #!/bin/bash
 exec &> /home/$USERNAME/setup-user.log
 
-echo "Install configurations from archive"
+echo "Install configurations with user privileges"
+
 if [ -n "$USERTOOLS" ]
 then
+    echo "Download configurations from $USERTOOLS"
     pushd . &> /dev/null
     mkdir --parents /tmp/vagrant-bootstrap
     cd /tmp/vagrant-bootstrap
@@ -47,9 +49,16 @@ then
     rm --recursive --force /tmp/vagrant-bootstrap
 fi
 
-echo "Remove setup scripts"
-rm "/home/$USERNAME/.config/autostart/setup-user.desktop"
-rm "$0"
+if [ $? -eq 0 ]
+then
+    echo "Removing setup scripts"
+    rm --force "/home/$USERNAME/.config/autostart/setup-user.desktop"
+    rm --force "$0"
+else
+    rm --force "/home/$USERNAME/.config/autostart/setup-user.desktop"
+    echo "Removing setup script $0 skipped due to errors"
+    echo "Please investigate and execute this script again"
+fi
 EOF
 
 echo "Set permissions for setup files"
