@@ -53,9 +53,13 @@ Vagrant.configure("2") do |config|
 
   # Configure proxy settings
   # NOTE: This requires the vagrant-proxyconf plugin to be installed
-  # config.proxy.http = "<proto>://<ip>:<port>"
-  # config.proxy.https = "<proto>://<ip>:<port>"
-  # config.proxy.no_proxy = "localhost,127.0.0.1"
+  if configs["proxy"]
+    config.proxy.http = configs["proxy"]
+    config.proxy.https = configs["proxy"]
+    if configs["no_proxy"]
+      config.proxy.no_proxy = configs["no_proxy"]
+    end
+  end
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is

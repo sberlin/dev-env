@@ -1,3 +1,5 @@
+proxy: null
+no_proxy: null
 configs:
   use: "desktop"
   desktop:
