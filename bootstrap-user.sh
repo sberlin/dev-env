@@ -37,16 +37,15 @@ if [ -n "$USERTOOLS" ]
 then
     echo "Download configurations from $USERTOOLS"
     pushd . &> /dev/null
-    mkdir --parents /tmp/vagrant-bootstrap
-    cd /tmp/vagrant-bootstrap
+    cd "/home/$USERNAME/"
     curl --output tools.zip --fail --show-error --location "$USERTOOLS" && \
-        unzip -o tools.zip && \
+        unzip -o tools.zip -d git/ && \
         pushd . &> /dev/null && \
-        cd */ && \
-        make install && \
+        cd git/$(find git/ -maxdepth 1 -cmin -1 -type d -not -path git/) && \
+        make --keep-going install && \
         popd &> /dev/null
     popd &> /dev/null
-    rm --recursive --force /tmp/vagrant-bootstrap
+    rm --force "/home/$USERNAME/tools.zip"
 fi
 
 if [ $? -eq 0 ]
