@@ -1,20 +1,19 @@
 #!/bin/bash
 
-# Required variables
+echo "Test for required variables"
 test -z "$USERNAME" && exit
 
-# User specific settings
 echo "Create user $USERNAME with groups"
 adduser --disabled-login --gecos "$USERNAME,,," --home /home/$USERNAME --shell /bin/bash $USERNAME
 id --groups --name vagrant | tr ' ' '\n' | tail --lines=+2 | xargs -I{} adduser $USERNAME {}
 echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/99_$USERNAME
-chmod 440 /etc/sudoers.d/99_$USERNAME
+chmod --verbose 440 /etc/sudoers.d/99_$USERNAME
 
-# Create workspace
-mkdir --parents /opt/workspace/$USERNAME/{git,opt} /home/$USERNAME/.config/autostart
-ln --force --symbolic /opt/workspace/$USERNAME/git /home/$USERNAME/git
+echo "Create workspace"
+mkdir --verbose --parents /opt/workspace/$USERNAME/{git,opt} /home/$USERNAME/.config/autostart
+ln --verbose --force --symbolic /opt/workspace/$USERNAME/git /home/$USERNAME/git
 
-# Set permissions
+echo "Set permissions for user"
 chown --recursive $USERNAME:$USERNAME /home/$USERNAME /opt/workspace/$USERNAME /home/$USERNAME/.config/autostart
 
 echo "Create shortcut for calling user setup once at /home/$USERNAME/.config/autostart/setup-user.desktop"
@@ -61,7 +60,7 @@ fi
 EOF
 
 echo "Set permissions for setup files"
-chmod +x /home/$USERNAME/.config/autostart/setup-user.desktop /home/$USERNAME/setup-user.sh
+chmod --verbose +x /home/$USERNAME/.config/autostart/setup-user.desktop /home/$USERNAME/setup-user.sh
 chown --recursive $USERNAME:$USERNAME /home/$USERNAME/
 
 echo "Set predefined password"
