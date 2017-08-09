@@ -111,6 +111,7 @@ Vagrant.configure("2") do |config|
     "USERNAME" => vagrant_config["username"],
     "USERMAIL" => vagrant_config["usermail"],
     "USERTOOLS" => vagrant_config["usertools"],
+    "MAKEGUITARGET" => vagrant_config["makeguitarget"],
     "PASSWORD" => vagrant_config["password"],
     "GUI" => vagrant_config["gui"]
   }

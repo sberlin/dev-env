@@ -9,6 +9,7 @@ configs:
     hostname: "ubuntu-desktop-user"
     usermail: "user@users.noreply.github.com"
     usertools: "https://github.com/user/tools/archive/master.zip"
+    makeguitarget: "desktop_install"
     locale: "en_US.UTF-8"
     keymap: "en"
     timezone: "Europe/London"
