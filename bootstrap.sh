@@ -20,12 +20,13 @@ fi
 
 if [ -n "$KEYMAP" ]
 then
-    localectl set-keymap $KEYMAP
+    localectl set-keymap "$KEYMAP"
+    loadkeys "$KEYMAP"
 fi
 
 if [ -n "$TIMEZONE" ]
 then
-    timedatectl set-timezone $TIMEZONE
+    timedatectl set-timezone "$TIMEZONE"
 fi
 
 # Install Desktop
