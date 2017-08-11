@@ -69,7 +69,7 @@ else
 fi
 EOF
     echo "Set permissions for setup files"
-    chmod --verbose +x /home/$USERNAME/.config/autostart/setup-user.desktop /home/$USERNAME/setup-user.sh
+    chmod --verbose +x "/home/$USERNAME/.config/autostart/setup-user.desktop" "/home/$USERNAME/setup-user.sh"
 fi
 
 echo "Refresh permissions for /home/$USERNAME/"
