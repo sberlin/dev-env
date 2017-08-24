@@ -15,8 +15,8 @@
 * Create user, set password and add to the same groups as vagrant
 * Create directories `git` and `opt` at `/opt/workspace/<username>`
 * Download a zip file containing a `makefile`
-** with target `install` to apply further configurations
-** with configurable target to apply configurations for a desktop
+  * with target `install` to apply further configurations
+  * with configurable target to apply configurations for a desktop
 
 ## Dependencies
 * [vagrant-proxyconf](https://github.com/tmatilai/vagrant-proxyconf)
