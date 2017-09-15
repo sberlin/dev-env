@@ -96,6 +96,14 @@ Vagrant.configure("2") do |config|
   # end
 
   config.vm.provision "docker"
+  config.vm.provision "docker-compose", type: "shell", inline: <<-SHELL
+    curl -L $(curl -fsSL "https://api.github.com/repos/docker/compose/releases/latest" \
+        | grep -Po '[^"]+/docker-compose-'$(uname -s)-$(uname -m)) \
+        --output "/usr/local/bin/docker-compose"
+    chmod +x /usr/local/bin/docker-compose
+    curl -L "https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose" \
+        --output "/etc/bash_completion.d/docker-compose"
+SHELL
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
