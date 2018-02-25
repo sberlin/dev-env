@@ -1,0 +1,57 @@
+---
+
+- name: install or update Vim
+  package:
+    name: vim
+    state: latest
+
+import_role:
+  name: dotfiles
+
+- name: link imported Vim configuration
+  file:
+    src: /home/{{ username }}/git/dotfiles/.vimrc
+    dest: /home/{{ username }}/.vim/.vimrc-{{ username }}
+    force: yes
+
+- name: include imported Vim configuration
+  lineinfile:
+    path: /home/{{ username }}/.vimrc
+    line: "source /home/{{ username }}/.vim/.vimrc-{{ username }}"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 640
+
+- name: configure Vim as default shell editor
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    regexp: "^export EDITOR="
+    line: "export EDITOR=/usr/bin/vim.basic"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 750
+
+- name: download Vim theme Solarized
+  get_url:
+    url: "https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim"
+    dest: /home/{{ username }}/.vim/colors/solarized.vim
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+
+- name: configure Vim theme Solarized
+  blockinfile:
+    path: /home/{{ username }}/.bashrc
+    block: |
+      syntax enable
+      set background=dark
+      colorscheme solarized
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+
+- name: configure Vim as default system editor
+  command: update-alternatives --set editor /usr/bin/vim.basic
+

@@ -1,0 +1,33 @@
+---
+
+- name: install or update Git
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - git
+    - meld
+
+import_role:
+  name: dotfiles
+
+- name: link imported Git configuration
+  file:
+    src: /home/{{ username }}/git/dotfiles/.gitconfig
+    dest: /home/{{ username }}/.gitconfig-{{ username }}
+    force: yes
+
+- name: include imported Git configuration
+  git_config:
+    scope: global
+    name: include.path
+    value: /home/{{ username }}/.gitconfig-{{ username }}
+
+- name: create user's Git directory
+  file:
+    path: /home/{{ username }}/git
+    state: directory
+    mode: 0750
+    owner: "{{ username }}"
+    group: "{{ username }}"
+

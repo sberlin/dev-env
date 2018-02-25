@@ -1,0 +1,52 @@
+---
+
+- name: install or update tmux
+  package:
+    name: tmux
+    state: latest
+
+import_role:
+  name: dotfiles
+
+- name: link imported tmux configuration
+  file:
+    src: /home/{{ username }}/git/dotfiles/.tmux.conf
+    dest: /home/{{ username }}/.tmux-{{ username }}.conf
+    force: yes
+
+- name: include imported tmux configuration
+  lineinfile:
+    path: /home/{{ username }}/.tmux.conf
+    line: "source-file /home/{{ username }}/.tmux-{{ username }}.conf"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 640
+
+- name: download tmux theme Solarized
+  get_url:
+    url: "https://raw.githubusercontent.com/altercation/tmux-colors-solarized/master/tmuxcolors-256.conf"
+    dest: /home/{{ username }}/.tmux-solarized.conf
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+
+- name: include downloaded tmux configuration
+  lineinfile:
+    path: /home/{{ username }}/.tmux.conf
+    line: "source-file /home/{{ username }}/.tmux-solarized.conf"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 640
+
+- name: set tmux alias for proper color loading
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    regexp: "^alias tmux="
+    line: "alias tmux=\"tmux -2\""
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 750
+
