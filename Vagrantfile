@@ -12,11 +12,6 @@ vagrant_config = configs["configs"][configs["configs"]["use"]]
 # you"re doing.
 Vagrant.configure("2") do |config|
   VAGRANT_COMMAND = ARGV[0]
-  if VAGRANT_COMMAND == "ssh"
-    config.ssh.username = vagrant_config["username"]
-    config.ssh.password = vagrant_config["password"]
-    config.ssh.insert_key = true
-  end
 
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
@@ -88,43 +83,4 @@ Vagrant.configure("2") do |config|
 
   config.vm.hostname = vagrant_config["hostname"]
 
-  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
-  # such as FTP and Heroku are also available. See the documentation at
-  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
-  # config.push.define "atlas" do |push|
-  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
-  # end
-
-  config.vm.provision "docker"
-  config.vm.provision "docker-compose", type: "shell", inline: <<-SHELL
-    curl -L $(curl -fsSL "https://api.github.com/repos/docker/compose/releases/latest" \
-        | grep -Po '[^"]+/docker-compose-'$(uname -s)-$(uname -m)) \
-        --output "/usr/local/bin/docker-compose"
-    chmod +x /usr/local/bin/docker-compose
-    curl -L "https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose" \
-        --output "/etc/bash_completion.d/docker-compose"
-SHELL
-
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  config.vm.provision "system", type: "shell", path: "bootstrap.sh", env: {
-    "LOCALE" => vagrant_config["locale"],
-    "KEYMAP" => vagrant_config["keymap"],
-    "TIMEZONE" => vagrant_config["timezone"],
-    "GUI" => vagrant_config["gui"]
-  }
-
-  # User specific setup
-  config.vm.provision "user", type: "shell", path: "bootstrap-user.sh", env: {
-    "USERNAME" => vagrant_config["username"],
-    "USERMAIL" => vagrant_config["usermail"],
-    "USERTOOLS" => vagrant_config["usertools"],
-    "MAKEGUITARGET" => vagrant_config["makeguitarget"],
-    "PASSWORD" => vagrant_config["password"],
-    "GUI" => vagrant_config["gui"]
-  }
-
-  # This requires the vagrant-reload plugin to be installed
-  config.vm.provision :reload
 end
