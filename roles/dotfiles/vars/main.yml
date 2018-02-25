@@ -1,0 +1,4 @@
+---
+
+dotfiles_repo: "git@github.com/{{ username }}/dotfiles.git"
+
