@@ -1,0 +1,13 @@
+---
+
+  - name: install workstation
+    hosts: all
+    gather_facts: false
+    roles:
+      - bash
+      - docker
+      - git
+      - tmux
+      - vim
+      - gnome
+

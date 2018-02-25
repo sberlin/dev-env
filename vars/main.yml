@@ -1,0 +1,27 @@
+---
+
+username: sberlin
+password: sberlin
+hostname: workstation
+locale: en_US.UTF-8
+keymap: de
+timezone: Europe/Berlin
+packages:
+  - "@development tools"
+  - git
+  - groovy
+  - htop
+  - inotify-tools
+  - iotop
+  - jq
+  - nmap
+  - nodejs
+  - npm
+  - openjdk-8
+  - openssl
+  - strace
+  - vagrant
+  - virtualbox
+  - xclip
+  - xsel
+
