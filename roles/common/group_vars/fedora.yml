@@ -1,11 +1,5 @@
 ---
 
-username: sberlin
-password: sberlin
-hostname: workstation
-locale: en_US.UTF-8
-keymap: de
-timezone: Europe/Berlin
 package_groups:
   - "@Development Tools"
   - "@Fedora Workstation"

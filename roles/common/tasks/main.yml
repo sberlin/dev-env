@@ -1,5 +1,19 @@
 ---
 
+- name: install package groups
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ package_groups }}"
+  when: package_groups is defined
+
+- name: install packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ packages }}"
+  when: packages is defined
+
 - name: set hostname to {{ hostname }}
   hostname: "{{ hostname }}"
 
@@ -22,10 +36,13 @@
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
     validate: visudo -cf %s
 
-- name: set locale to {{ locale }}
+- name: generate locale {{ locale }}
   locale_gen:
     name: "{{ locale }}"
     state: present
+  when: locale is defined
+
+- name: set local to {{ locale }}
   command: localectl set-locale LANG={{ locale }}
   when: locale is defined
 
@@ -39,18 +56,4 @@
   timezone:
     name: "{{ timezone }}"
   when: timezone is defined
-
-- name: install package groups
-  package:
-    name: "{{ item }}"
-    state: latest
-  with_items: "{{ package_groups }}"
-  when: package_groups is defined
-
-- name: install packages
-  package:
-    name: "{{ item }}"
-    state: latest
-  with_items: "{{ packages }}"
-  when: packages is defined
 
