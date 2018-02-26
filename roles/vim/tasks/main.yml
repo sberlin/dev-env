@@ -17,7 +17,7 @@ import_role:
 - name: include imported Vim configuration
   lineinfile:
     path: /home/{{ username }}/.vimrc
-    line: "source /home/{{ username }}/.vim/.vimrc-{{ username }}"
+    line: "source ~/.vim/.vimrc-{{ username }}"
     create: yes
     owner: "{{ username }}"
     group: "{{ username }}"

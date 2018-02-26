@@ -17,7 +17,7 @@ import_role:
 - name: include imported tmux configuration
   lineinfile:
     path: /home/{{ username }}/.tmux.conf
-    line: "source-file /home/{{ username }}/.tmux-{{ username }}.conf"
+    line: "source-file ~/.tmux-{{ username }}.conf"
     create: yes
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -34,7 +34,7 @@ import_role:
 - name: include downloaded tmux configuration
   lineinfile:
     path: /home/{{ username }}/.tmux.conf
-    line: "source-file /home/{{ username }}/.tmux-solarized.conf"
+    line: "source-file ~/.tmux-solarized.conf"
     create: yes
     owner: "{{ username }}"
     group: "{{ username }}"

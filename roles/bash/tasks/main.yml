@@ -20,7 +20,7 @@ import_role:
 - name: include imported Bash configuration
   lineinfile:
     path: /home/{{ username }}/.bashrc
-    line: "source /home/{{ username }}/.bashrc-{{ username }}"
+    line: "source ~/.bashrc-{{ username }}"
     create: yes
     owner: "{{ username }}"
     group: "{{ username }}"
