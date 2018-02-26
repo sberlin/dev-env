@@ -1,0 +1,56 @@
+---
+
+- name: install build dependencies
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - libcurl-devel
+    - sqlite-devel
+
+- name: install dlang
+  shell: curl -fsS https://dlang.org/install.sh | bash -s dmd
+
+- name: clone onedrive sources
+  git:
+    repo: "https://github.com/skilion/onedrive"
+    dest: /home/{{ username }}/git/onedrive
+
+- name: install or update onedrive
+  command: |
+    make
+    make install
+  args:
+    chdir: /home/{{ username }}/git/onedrive
+
+- name: create configuration directory
+  file:
+    path: /home/{{ username }}/.config/onedrive/
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 750
+
+- name: copy default configuration
+  copy:
+    src: /home/{{ username }}/git/onedrive/config
+    dest: /home/{{ username }}/.config/onedrive/config
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 640
+
+- name: change onedrive working directory
+  lineinfile:
+    path: /home/{{ username }}/.config/onedrive/config
+    regexp: "^sync_dir ="
+    line: 'sync_dir = "~/onedrive"'
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 640
+
+- name: use onedrive as a service
+  service:
+    name: onedrive
+    enabled: true
+    state: started
+
