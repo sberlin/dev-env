@@ -45,6 +45,23 @@ import_role:
     group: "{{ username }}"
     mode: 750
 
+- name: set Git Bash prompt modifiers in .bashrc
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 750
+  with_items:
+    - line: "export GIT_PS1_SHOWDIRTYSTATE=1"
+      regexp: "^export GIT_PS1_SHOWDIRTYSTATE="
+    - line: "export GIT_PS1_SHOWUNTRACKEDFILES=1"
+      regexp: "^export GIT_PS1_SHOWUNTRACKEDFILES="
+    - line: 'export GIT_PS1_SHOWUPSTREAM="verbose"'
+      regexp: "^export GIT_PS1_SHOWUPSTREAM="
+
 - name: extend Bash prompt variable
   replace:
     path: /home/{{ username }}/.bashrc
