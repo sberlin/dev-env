@@ -5,6 +5,7 @@
     gather_facts: true
     roles:
       - bash
+      - executables
       - docker
       - git
       - tmux

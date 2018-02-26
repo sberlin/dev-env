@@ -40,14 +40,6 @@
     name: "{{ timezone }}"
   when: timezone is defined
 
-- name: create user directories
-  file:
-    path: /home/{{ username }}/bin
-    state: directory
-    mode: 0750
-    owner: "{{ username }}"
-    group: "{{ username }}"
-
 - name: install package groups
   package:
     name: "{{ item }}"

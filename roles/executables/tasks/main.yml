@@ -1,0 +1,19 @@
+---
+
+- name: create user directory for executables
+  file:
+    path: /home/{{ username }}/bin/
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+
+- name: copy executable files
+  copy:
+    src: "{{ item }}"
+    dest: /home/{{ username }}/bin/
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  with_fileglob: files/*
+
