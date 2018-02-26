@@ -4,7 +4,9 @@ configs:
   use: "desktop"
   desktop:
     gui: true
+    basebox: "generic/fedora27"
     hostname: "fedora-desktop-user"
   server:
     gui: false
+    basebox: "generic/fedora27"
     hostname: "fedora-server-user"
