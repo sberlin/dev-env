@@ -43,7 +43,7 @@ import_role:
     create: yes
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: 750
+    mode: 0750
 
 - name: set Git Bash prompt modifiers in .bashrc
   lineinfile:
@@ -53,7 +53,7 @@ import_role:
     create: yes
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: 750
+    mode: 0750
   with_items:
     - line: "export GIT_PS1_SHOWDIRTYSTATE=1"
       regexp: "^export GIT_PS1_SHOWDIRTYSTATE="
@@ -69,5 +69,5 @@ import_role:
     replace: 'export PS1=\1\w\[\033[0;35m\]$(__git_ps1 " (%s)")\2'
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: 750
+    mode: 0750
 

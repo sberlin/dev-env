@@ -21,7 +21,7 @@ import_role:
     create: yes
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: 640
+    mode: 0640
 
 - name: configure Vim as default shell editor
   lineinfile:
@@ -31,7 +31,7 @@ import_role:
     create: yes
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: 750
+    mode: 0750
 
 - name: download Vim theme Solarized
   get_url:

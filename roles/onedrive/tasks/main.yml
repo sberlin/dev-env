@@ -29,7 +29,7 @@
     state: directory
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: 750
+    mode: 0750
 
 - name: copy default configuration
   copy:
@@ -37,7 +37,7 @@
     dest: /home/{{ username }}/.config/onedrive/config
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: 640
+    mode: 0640
 
 - name: change onedrive working directory
   lineinfile:
@@ -46,7 +46,7 @@
     line: 'sync_dir = "~/onedrive"'
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: 640
+    mode: 0640
 
 - name: use onedrive as a service
   service:
