@@ -31,3 +31,26 @@ import_role:
     owner: "{{ username }}"
     group: "{{ username }}"
 
+- name: download Git Bash prompt
+  get_url:
+    url: "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
+    dest: /home/{{ username }}/.git-prompt.sh
+
+- name: include Git Bash prompt in .bashrc
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    line: "source ~/.git-prompt.sh"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 750
+
+- name: extend Bash prompt variable
+  replace:
+    path: /home/{{ username }}/.bashrc
+    regexp: "export PS1=(.*)\\w(.*)"
+    replace: 'export PS1=\1\w\[\033[0;35m\]$(__git_ps1 " (%s)")\2'
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 750
+
