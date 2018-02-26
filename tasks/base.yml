@@ -48,6 +48,13 @@
     owner: "{{ username }}"
     group: "{{ username }}"
 
+- name: install package groups
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ package_groups }}"
+  when: package_groups is defined
+
 - name: install packages
   package:
     name: "{{ item }}"
