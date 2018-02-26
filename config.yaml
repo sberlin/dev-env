@@ -4,7 +4,7 @@ configs:
   use: "desktop"
   desktop:
     gui: true
-    hostname: "ubuntu-desktop-user"
+    hostname: "fedora-desktop-user"
   server:
     gui: false
-    hostname: "ubuntu-server-user"
+    hostname: "fedora-server-user"
