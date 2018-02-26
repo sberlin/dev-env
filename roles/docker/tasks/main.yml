@@ -14,6 +14,12 @@
     state: latest
   when: 'RedHat' == {{ ansible_os_family }}
 
+- name: start Docker service
+  service:
+    name: docker
+    enabled: true
+    state: started
+
 - name: add user {{ username }} to Docker group
   user:
     name: "{{ username }}"
