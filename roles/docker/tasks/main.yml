@@ -1,9 +1,18 @@
 ---
 
-- name: install or update Docker
+- name: install or update Docker from web
+  shell: curl -fsSL get.docker.com | bash
+  when: 'RedHat' != {{ ansible_os_family }}
+
+- name: add Docker repository
+  command: dnf config-manager --add-repo "https://download.docker.com/linux/{{ ansible_distribution|lower }}/docker-ce.repo"
+  when: 'RedHat' == {{ ansible_os_family }}
+
+- name: install or update Docker from repository
   package:
     name: docker-ce
     state: latest
+  when: 'RedHat' == {{ ansible_os_family }}
 
 - name: add user {{ username }} to Docker group
   user:
