@@ -8,8 +8,8 @@
     - git
     - meld
 
-import_role:
-  name: dotfiles
+- import_role:
+    name: dotfiles
 
 - name: link imported Git configuration
   file:

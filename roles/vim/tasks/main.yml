@@ -5,8 +5,8 @@
     name: vim
     state: latest
 
-import_role:
-  name: dotfiles
+- import_role:
+    name: dotfiles
 
 - name: link imported Vim configuration
   file:

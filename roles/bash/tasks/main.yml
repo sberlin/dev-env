@@ -8,8 +8,8 @@
     - bash
     - bash-completion
 
-import_role:
-  name: dotfiles
+- import_role:
+    name: dotfiles
 
 - name: link imported Bash configuration
   file:

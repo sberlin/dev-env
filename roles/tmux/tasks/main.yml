@@ -5,8 +5,8 @@
     name: tmux
     state: latest
 
-import_role:
-  name: dotfiles
+- import_role:
+    name: dotfiles
 
 - name: link imported tmux configuration
   file:

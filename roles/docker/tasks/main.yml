@@ -2,17 +2,17 @@
 
 - name: install or update Docker from web
   shell: curl -fsSL get.docker.com | bash
-  when: 'RedHat' != {{ ansible_os_family }}
+  when: ansible_os_family != 'RedHat'
 
 - name: add Docker repository
   command: dnf config-manager --add-repo "https://download.docker.com/linux/{{ ansible_distribution|lower }}/docker-ce.repo"
-  when: 'RedHat' == {{ ansible_os_family }}
+  when: ansible_os_family == 'RedHat'
 
 - name: install or update Docker from repository
   package:
     name: docker-ce
     state: latest
-  when: 'RedHat' == {{ ansible_os_family }}
+  when: ansible_os_family == 'RedHat'
 
 - name: start Docker service
   service:

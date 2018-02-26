@@ -18,5 +18,6 @@
   with_fileglob: files/*
 
 - name: start script for adjusting brightness on reboot
-  job: "while sleep 10; do /home/{{ username }}/bin/adjust-brightness.sh > /dev/null; done"
+  cron:
+    job: "while sleep 10; do /home/{{ username }}/bin/adjust-brightness.sh > /dev/null; done"
 
