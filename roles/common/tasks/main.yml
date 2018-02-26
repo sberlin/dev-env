@@ -15,7 +15,8 @@
   when: packages is defined
 
 - name: set hostname to {{ hostname }}
-  hostname: "{{ hostname }}"
+  hostname:
+    name: "{{ hostname }}"
 
 - name: create user {{ username }} with ssh key
   user:
