@@ -1,15 +1,16 @@
 ---
 
-  - name: install workstation
-    hosts: all
-    gather_facts: true
-    roles:
-      - bash
-      - executables
-      - docker
-      - git
-      - tmux
-      - vim
-      - gnome
-      - onedrive
+- name: install workstation
+  hosts: all
+  gather_facts: true
+  roles:
+    - bash
+    - executables
+    - docker
+    - git
+    - tmux
+    - vim
+    - gnome
+    - onedrive
+
 
