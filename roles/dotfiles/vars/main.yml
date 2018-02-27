@@ -1,4 +1,4 @@
 ---
 
-dotfiles_repo: "git@github.com/{{ username }}/dotfiles.git"
+dotfiles_repo: "https://github.com/{{ username }}/tools.git"
 

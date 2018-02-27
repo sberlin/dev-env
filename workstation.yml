@@ -17,10 +17,10 @@
     - include_vars: "{{ ansible_distribution|lower }}.yml"
   roles:
     - common
+    - git
     - bash
     - executables
     - docker
-    - git
     - tmux
     - vim
     - onedrive

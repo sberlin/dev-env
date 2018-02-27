@@ -1,9 +1,7 @@
 ---
 
 - name: clone dotfiles repository from {{ dotfiles_repo }}
-  become: yes
-  become_user: "{{ username }}"
   git:
-    repo: {{ dotfiles_repo }}
+    repo: "{{ dotfiles_repo }}"
     dest: /home/{{ username }}/git/dotfiles
 
