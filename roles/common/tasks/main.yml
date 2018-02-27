@@ -14,6 +14,13 @@
   with_items: "{{ packages }}"
   when: packages is defined
 
+- name: identify installed packages
+  command: rpm --query --all --queryformat "%{NAME} "
+  register: installed_packages
+
+- name: update already installed packages
+  action: "{{ ansible_pkg_mgr }} name=* state=latest"
+
 - name: set hostname to {{ hostname }}
   hostname:
     name: "{{ hostname }}"
