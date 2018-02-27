@@ -37,18 +37,12 @@
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
     validate: visudo -cf %s
 
-- name: generate locale {{ locale }}
-  locale_gen:
-    name: "{{ locale }}"
-    state: present
-  when: locale is defined
-
-- name: set local to {{ locale }}
+- name: set locale to {{ locale }}
   command: localectl set-locale LANG={{ locale }}
   when: locale is defined
 
 - name: set keymap to {{ keymap }}
-  command: |
+  shell: |
     localectl set-keymap {{ keymap }}
     loadkeys {{ keymap }}
   when: keymap is defined

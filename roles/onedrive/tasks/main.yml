@@ -17,7 +17,7 @@
     dest: /home/{{ username }}/git/onedrive
 
 - name: install or update onedrive
-  command: |
+  shell: |
     make
     make install
   args:

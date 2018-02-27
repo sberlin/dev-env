@@ -14,7 +14,10 @@
 - name: link imported Bash configuration
   file:
     src: /home/{{ username }}/git/dotfiles/.bashrc
-    dest: /home/{{ username }}/.bashrc-{{ username }}
+    path: /home/{{ username }}/.bashrc-{{ username }}
+    state: link
+    owner: "{{ username }}"
+    group: "{{ username }}"
     force: yes
 
 - name: include imported Bash configuration
