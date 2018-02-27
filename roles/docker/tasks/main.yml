@@ -26,19 +26,20 @@
     groups: docker
     append: yes
 
-- name: determine latest version of Docker Compose
-  shell: curl -fsSL "https://api.github.com/repos/docker/compose/releases/latest" | grep -Po '[^"]+/docker-compose-'$(uname -s)-$(uname -m)
-  register: docker_compose_url
+- name: download releases metadata of Docker Compose
+  uri:
+    url: "https://api.github.com/repos/docker/compose/releases/latest"
+    body_format: json
+    return_content: yes
+  register: docker_compose_releases
 
 - name: download Docker Compose
   get_url:
-    url: "{{ docker_compose_url }}"
+    url: "{{ item.browser_download_url }}"
     dest: /usr/local/bin/docker-compose
-
-- name: set executable bit on Docker Compose
-  file:
-    path: /usr/local/bin/docker-compose
-    mode: +x
+    mode: 0750
+  when: item.browser_download_url.endswith('Linux-x86_64')
+  with_items: "{{ docker_compose_releases.json.assets }}"
 
 - name: download bash completion for Docker Compose
   get_url:
