@@ -3,6 +3,8 @@
 - name: install workstation
   hosts: all
   gather_facts: true
+  become: yes
+  become_user: root
   roles:
     - bash
     - executables
