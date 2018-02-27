@@ -5,6 +5,7 @@ package_groups:
   - "@Fedora Workstation"
   - "@System Tools"
 packages:
+  - ansible
   - glances
   - groovy
   - hostname
@@ -13,6 +14,7 @@ packages:
   - iotop
   - java-1.8.0-openjdk
   - jq
+  - libselinux-python
   - nmap
   - nodejs
   - npm
