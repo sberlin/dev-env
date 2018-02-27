@@ -1,11 +1,22 @@
 ---
 
+- name: group by OS distribution
+  hosts: all
+  tasks:
+    - group_by:
+        key: "{{ ansible_distribution|lower }}"
+    - debug:
+        msg: found OS distribution {{ ansible_distribution|lower }}
+
 - name: install workstation
   hosts: all
   gather_facts: true
   become: yes
   become_user: root
+  tasks:
+    - include_vars: "{{ ansible_distribution|lower }}.yml"
   roles:
+    - common
     - bash
     - executables
     - docker
@@ -14,5 +25,4 @@
     - vim
     - gnome
     - onedrive
-
 
