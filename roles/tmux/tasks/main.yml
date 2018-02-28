@@ -28,7 +28,7 @@
 
 - name: download tmux theme Solarized
   get_url:
-    url: "https://raw.githubusercontent.com/altercation/tmux-colors-solarized/master/tmuxcolors-256.conf"
+    url: "https://raw.githubusercontent.com/seebi/tmux-colors-solarized/master/tmuxcolors-dark.conf"
     dest: /home/{{ username }}/.tmux-solarized.conf
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -42,14 +42,4 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
-
-- name: set tmux alias for proper color loading
-  lineinfile:
-    path: /home/{{ username }}/.bashrc
-    regexp: "^alias tmux="
-    line: "alias tmux=\"tmux -2\""
-    create: yes
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: 0750
 
