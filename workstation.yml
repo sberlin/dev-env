@@ -25,13 +25,3 @@
     - vim
     - onedrive
 
-- name: clean up setup
-  hosts: all
-  tasks:
-    - file:
-        path: /home/{{ username }}
-        state: directory
-        recurse: yes
-        owner: "{{ username }}"
-        group: "{{ username }}"
-

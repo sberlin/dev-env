@@ -4,4 +4,6 @@
   git:
     repo: "{{ dotfiles_repo }}"
     dest: /home/{{ username }}/git/dotfiles
+  become: yes
+  become_user: "{{ username }}"
 

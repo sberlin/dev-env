@@ -10,11 +10,15 @@
 
 - name: install dlang
   shell: curl -fsS https://dlang.org/install.sh | bash -s dmd
+  become: yes
+  become_user: "{{ username }}"
 
 - name: clone onedrive sources
   git:
     repo: "https://github.com/skilion/onedrive"
     dest: /home/{{ username }}/git/onedrive
+  become: yes
+  become_user: "{{ username }}"
 
 - name: install or update onedrive
   shell: |
