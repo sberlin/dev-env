@@ -23,3 +23,5 @@ packages:
   - xclip
   - xsel
 
+package_gnome: "@GNOME"
+

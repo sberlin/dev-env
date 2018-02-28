@@ -1,0 +1,20 @@
+---
+
+- name: install or update Gnome
+  package:
+    name: "{{ package_gnome }}"
+    state: latest
+
+- name: start Gnome Desktop Manager
+  service:
+    name: gdm
+    enabled: true
+    state: started
+
+- name: configure Gnome by using dconf
+  shell: |
+    export $(/usr/bin/dbus-launch)
+    dconf load /
+  args:
+    stdin: "{{ lookup('file', 'files/dconf.ini') }}"
+
