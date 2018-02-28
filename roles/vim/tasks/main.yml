@@ -26,16 +26,6 @@
     group: "{{ username }}"
     mode: 0640
 
-- name: configure Vim as default shell editor
-  lineinfile:
-    path: /home/{{ username }}/.bashrc
-    regexp: "^export EDITOR="
-    line: "export EDITOR=/usr/bin/vim.basic"
-    create: yes
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: 0750
-
 - name: create subdirectory for Vim configuration
   file:
     dest: /home/{{ username }}/.vim/colors/
@@ -54,7 +44,7 @@
 
 - name: configure Vim theme Solarized
   blockinfile:
-    path: /home/{{ username }}/.bashrc
+    path: /home/{{ username }}/.vimrc-{{ username }}
     block: |
       syntax enable
       set background=dark
@@ -64,5 +54,17 @@
     mode: 0640
 
 - name: configure Vim as default system editor
-  command: update-alternatives --set editor /usr/bin/vim
+  shell: |
+    alternatives --install /usr/bin/editor editor /usr/bin/vim 1
+    update-alternatives --set editor /usr/bin/vim
+
+- name: point editor variable to default system editor
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    regexp: "^export EDITOR="
+    line: "export EDITOR=/usr/bin/editor"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
 
