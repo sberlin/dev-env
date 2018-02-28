@@ -60,9 +60,37 @@
     group: "{{ username }}"
     mode: 0640
 
+- name: get user id
+  command: id -u {{ username }}
+  become: yes
+  become_user: "{{ username }}"
+  register: uid
+  when: ansible_service_mgr == 'systemd'
+
+- name: enable use of user-specific systemd without session
+  command: loginctl enable-linger {{ username }}
+  when: ansible_service_mgr == 'systemd'
+
+- name: use onedrive as a service
+  systemd:
+    name: onedrive
+    enabled: true
+    state: started
+    user: yes
+  become: yes
+  become_user: "{{ username }}"
+  environment:
+    XDG_RUNTIME_DIR: /run/user/{{ uid.stdout }}
+  when: ansible_service_mgr == 'systemd'
+
+- name: disable use of user-specific systemd without session
+  command: loginctl disable-linger {{ username }}
+  when: ansible_service_mgr == 'systemd'
+
 - name: use onedrive as a service
   service:
     name: onedrive
     enabled: true
     state: started
+  when: ansible_service_mgr != 'systemd'
 
