@@ -12,6 +12,9 @@
   file:
     src: /home/{{ username }}/git/dotfiles/.tmux.conf
     dest: /home/{{ username }}/.tmux-{{ username }}.conf
+    state: link
+    owner: "{{ username }}"
+    group: "{{ username }}"
     force: yes
 
 - name: include imported tmux configuration

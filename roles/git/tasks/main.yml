@@ -15,6 +15,9 @@
   file:
     src: /home/{{ username }}/git/dotfiles/.gitconfig
     dest: /home/{{ username }}/.gitconfig-{{ username }}
+    state: link
+    owner: "{{ username }}"
+    group: "{{ username }}"
     force: yes
 
 - name: include imported Git configuration
