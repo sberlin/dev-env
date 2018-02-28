@@ -11,13 +11,16 @@
 - name: link imported Vim configuration
   file:
     src: /home/{{ username }}/git/dotfiles/.vimrc
-    dest: /home/{{ username }}/.vim/.vimrc-{{ username }}
+    dest: /home/{{ username }}/.vimrc-{{ username }}
+    state: link
     force: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
 
 - name: include imported Vim configuration
   lineinfile:
     path: /home/{{ username }}/.vimrc
-    line: "source ~/.vim/.vimrc-{{ username }}"
+    line: "source ~/.vimrc-{{ username }}"
     create: yes
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -29,6 +32,14 @@
     regexp: "^export EDITOR="
     line: "export EDITOR=/usr/bin/vim.basic"
     create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+
+- name: create subdirectory for Vim configuration
+  file:
+    dest: /home/{{ username }}/.vim/colors/
+    state: directory
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0750
@@ -53,5 +64,5 @@
     mode: 0640
 
 - name: configure Vim as default system editor
-  command: update-alternatives --set editor /usr/bin/vim.basic
+  command: update-alternatives --set editor /usr/bin/vim
 
