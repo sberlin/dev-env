@@ -67,8 +67,8 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.gui = vagrant_config["gui"]
     vb.name = vagrant_config["hostname"]
-    vb.memory = "1024"
-    vb.cpus = "2"
+    vb.memory = "4096"
+    vb.cpus = "4"
     vb.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
     vb.customize ["modifyvm", :id, "--cpuhotplug", "on"]
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
