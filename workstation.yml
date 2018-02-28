@@ -13,8 +13,6 @@
   gather_facts: true
   become: yes
   become_user: root
-  tasks:
-    - include_vars: "{{ ansible_distribution|lower }}.yml"
   roles:
     - common
     - git
