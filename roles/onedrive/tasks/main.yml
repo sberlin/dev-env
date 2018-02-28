@@ -20,9 +20,17 @@
   become: yes
   become_user: "{{ username }}"
 
-- name: install or update onedrive
+- name: compile onedrive
   shell: |
+    source ~/dlang/dmd-*/activate
     make
+  args:
+    chdir: /home/{{ username }}/git/onedrive
+  become: yes
+  become_user: "{{ username }}"
+
+- name: install onedrive
+  shell: |
     make install
   args:
     chdir: /home/{{ username }}/git/onedrive
