@@ -38,6 +38,9 @@
   get_url:
     url: "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
     dest: /home/{{ username }}/.git-prompt.sh
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
 
 - name: include Git Bash prompt in .bashrc
   lineinfile:
