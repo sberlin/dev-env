@@ -4,12 +4,8 @@
   package:
     name: "{{ package_gnome }}"
     state: latest
-
-- name: start Gnome Desktop Manager
-  service:
-    name: gdm
-    enabled: true
-    state: started
+  notify:
+    - restart Gnome
 
 - name: configure Gnome by using dconf
   shell: |

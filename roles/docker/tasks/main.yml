@@ -3,6 +3,8 @@
 - name: install or update Docker from web
   shell: curl -fsSL get.docker.com | bash
   when: ansible_os_family != 'RedHat'
+  notify:
+    - restart Docker
 
 - name: add Docker repository
   command: dnf config-manager --add-repo "https://download.docker.com/linux/{{ ansible_distribution|lower }}/docker-ce.repo"
@@ -13,12 +15,8 @@
     name: docker-ce
     state: latest
   when: ansible_os_family == 'RedHat'
-
-- name: start Docker service
-  service:
-    name: docker
-    enabled: true
-    state: started
+  notify:
+    - restart Docker
 
 - name: add user {{ username }} to Docker group
   user:

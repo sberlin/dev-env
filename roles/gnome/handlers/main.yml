@@ -1,0 +1,8 @@
+---
+
+- name: restart Gnome
+  service:
+    name: gdm
+    enabled: true
+    state: restarted
+
