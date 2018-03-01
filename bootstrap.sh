@@ -3,6 +3,7 @@
 # Install applications
 apt-get update
 apt-get install --assume-yes \
+    bash-completion \
     make \
     zip \
     build-essential \
