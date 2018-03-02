@@ -49,6 +49,7 @@
       syntax enable
       set background=dark
       colorscheme solarized
+    marker: '" {mark} ANSIBLE MANAGED BLOCK'
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
