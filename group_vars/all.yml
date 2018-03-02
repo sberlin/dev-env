@@ -1,7 +1,6 @@
 ---
 
 username: sberlin
-password: sberlin
 
 packages:
   - ansible

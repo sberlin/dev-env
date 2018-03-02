@@ -34,7 +34,12 @@
     generate_ssh_key: yes
     ssh_key_bits: 4096
     ssh_key_comment: "{{ username }}@{{ hostname }}"
+
+- name: set password for user {{ username }}
+  user:
+    name: "{{ username }}"
     password: "{{ password|password_hash('sha512') }}"
+  when: password != ''
 
 - name: add wheel group to sudoers
   lineinfile:
