@@ -1,2 +1,6 @@
-.vagrant
+.vagrant/
+.idea/
+vault
+*.retry
+.*.swp
 
