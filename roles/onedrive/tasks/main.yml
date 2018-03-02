@@ -47,6 +47,7 @@
   copy:
     src: /home/{{ username }}/git/onedrive/config
     dest: /home/{{ username }}/.config/onedrive/config
+    backup: yes
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
