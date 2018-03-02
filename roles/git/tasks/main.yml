@@ -72,7 +72,7 @@
   replace:
     path: /home/{{ username }}/.bashrc
     regexp: "export PS1=(.*)\\w(.*)"
-    replace: 'export PS1=\1\w\[\033[0;35m\]$(__git_ps1 " (%s)")\2'
+    replace: 'export PS1=\1\w\[\033[0;35m\]$(__git_ps1 " (%s) 2>/dev/null")\2'
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0750
