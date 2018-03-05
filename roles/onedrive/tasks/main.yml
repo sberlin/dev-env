@@ -22,7 +22,7 @@
 
 - name: compile onedrive
   shell: |
-    source ~/dlang/dmd-*/activate
+    source /home/{{ username }}/dlang/dmd-*/activate
     make
   args:
     chdir: /home/{{ username }}/git/onedrive
