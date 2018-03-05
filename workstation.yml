@@ -6,18 +6,11 @@
   become: yes
   become_user: root
   roles:
-    - common
     - git
     - bash
     - executables
-    - docker
     - tmux
     - vim
     - gnome
     - onedrive
-  vars_prompt:
-    - name: password
-      prompt: "Enter the password to set for your user (omit to keep it)"
-      confirm: yes
-      private: yes
 

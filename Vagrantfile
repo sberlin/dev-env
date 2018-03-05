@@ -84,7 +84,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = vagrant_config["hostname"]
 
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "workstation.yml"
+    ansible.playbook = "site.yml"
   end
 
 end

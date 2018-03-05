@@ -8,6 +8,7 @@
     - debug:
         msg: found OS distribution {{ ansible_distribution|lower }}
 
+- import_playbook: system.yml
 - import_playbook: workstation.yml
 - import_playbook: peripherals.yml
 

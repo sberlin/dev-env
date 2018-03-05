@@ -1,0 +1,16 @@
+---
+
+- name: install packages, create user, setup locale
+  hosts: all
+  gather_facts: true
+  become: yes
+  become_user: root
+  roles:
+    - common
+    - docker
+  vars_prompt:
+    - name: password
+      prompt: "Enter the password to set for your user (omit to keep it)"
+      confirm: yes
+      private: yes
+
