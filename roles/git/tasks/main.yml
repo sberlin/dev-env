@@ -8,6 +8,14 @@
     - git
     - meld
 
+- name: create user's Git directory
+  file:
+    path: /home/{{ username }}/git
+    state: directory
+    mode: 0750
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
 - import_role:
     name: dotfiles
 
@@ -25,14 +33,6 @@
     scope: global
     name: include.path
     value: /home/{{ username }}/.gitconfig-{{ username }}
-
-- name: create user's Git directory
-  file:
-    path: /home/{{ username }}/git
-    state: directory
-    mode: 0750
-    owner: "{{ username }}"
-    group: "{{ username }}"
 
 - name: download Git Bash prompt
   get_url:
