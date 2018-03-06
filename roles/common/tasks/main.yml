@@ -20,12 +20,6 @@
     - packages
     - online
 
-- name: identify installed packages
-  command: rpm --query --all --queryformat "%{NAME} "
-  register: installed_packages
-  tags:
-    - packages
-
 - name: update already installed packages
   action: "{{ ansible_pkg_mgr }} name=* state=latest"
   tags:
