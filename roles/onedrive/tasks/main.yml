@@ -32,6 +32,7 @@
     source /home/{{ username }}/dlang/dmd-*/activate
     make
   args:
+    executable: /bin/bash
     chdir: /home/{{ username }}/git/onedrive
   become: yes
   become_user: "{{ username }}"
