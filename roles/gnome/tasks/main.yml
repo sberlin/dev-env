@@ -4,8 +4,6 @@
   package:
     name: "{{ package_gnome }}"
     state: latest
-  notify:
-    - restart Gnome
   tags:
     - packages
     - online
@@ -16,6 +14,8 @@
     dconf load /
   args:
     stdin: "{{ lookup('file', 'files/dconf.ini') }}"
+  notify:
+    - restart Gnome
   tags:
     - configs
 
