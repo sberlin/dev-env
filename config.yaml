@@ -1,7 +1,7 @@
 proxy: null
 no_proxy: null
 configs:
-  use: "ubuntu"
+  use: "desktop"
   ubuntu:
     gui: true
     basebox: "bento/ubuntu-17.10"
