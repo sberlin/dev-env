@@ -5,6 +5,7 @@ username: sberlin
 packages:
   - ansible
   - glances
+  - gradle
   - groovy
   - hostname
   - htop
