@@ -13,6 +13,7 @@
     - executables
     - tmux
     - vim
-    - gnome
+    - role: gnome
+      tags: [ gui ]
     - onedrive
 
