@@ -1,7 +1,11 @@
 proxy: null
 no_proxy: null
 configs:
-  use: "desktop"
+  use: "ubuntu"
+  ubuntu:
+    gui: true
+    basebox: "bento/ubuntu-17.10"
+    hostname: "ubuntu-desktop"
   desktop:
     gui: true
     basebox: "generic/fedora27"
