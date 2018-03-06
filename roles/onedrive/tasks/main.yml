@@ -7,11 +7,17 @@
   with_items:
     - libcurl-devel
     - sqlite-devel
+  tags:
+    - packages
+    - online
 
 - name: install dlang
   shell: curl -fsS https://dlang.org/install.sh | bash -s dmd
   become: yes
   become_user: "{{ username }}"
+  tags:
+    - packages
+    - online
 
 - name: clone onedrive sources
   git:
@@ -19,6 +25,9 @@
     dest: /home/{{ username }}/git/onedrive
   become: yes
   become_user: "{{ username }}"
+  tags:
+    - git
+    - online
 
 - name: compile onedrive
   shell: |
@@ -28,12 +37,16 @@
     chdir: /home/{{ username }}/git/onedrive
   become: yes
   become_user: "{{ username }}"
+  tags:
+    - make
 
 - name: install onedrive
   shell: |
     make install
   args:
     chdir: /home/{{ username }}/git/onedrive
+  tags:
+    - make
 
 - name: create configuration directory
   file:
@@ -42,6 +55,8 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0750
+  tags:
+    - directories
 
 - name: copy default configuration
   copy:
@@ -51,6 +66,8 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  tags:
+    - configs
 
 - name: change onedrive working directory
   lineinfile:
@@ -60,6 +77,8 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  tags:
+    - configs
 
 - name: get user id
   command: id -u {{ username }}
@@ -67,10 +86,16 @@
   become_user: "{{ username }}"
   register: uid
   when: ansible_service_mgr == 'systemd'
+  tags:
+    - service
+    - systemd
 
 - name: enable use of user-specific systemd without session
   command: loginctl enable-linger {{ username }}
   when: ansible_service_mgr == 'systemd'
+  tags:
+    - service
+    - systemd
 
 - name: use onedrive as a service
   systemd:
@@ -83,10 +108,16 @@
   environment:
     XDG_RUNTIME_DIR: /run/user/{{ uid.stdout }}
   when: ansible_service_mgr == 'systemd'
+  tags:
+    - service
+    - systemd
 
 - name: disable use of user-specific systemd without session
   command: loginctl disable-linger {{ username }}
   when: ansible_service_mgr == 'systemd'
+  tags:
+    - service
+    - systemd
 
 - name: use onedrive as a service
   service:
@@ -94,4 +125,6 @@
     enabled: true
     state: started
   when: ansible_service_mgr != 'systemd'
+  tags:
+    - service
 

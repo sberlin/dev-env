@@ -4,6 +4,9 @@
   package:
     name: vim
     state: latest
+  tags:
+    - packages
+    - online
 
 - import_role:
     name: dotfiles
@@ -16,6 +19,8 @@
     force: yes
     owner: "{{ username }}"
     group: "{{ username }}"
+  tags:
+    - dotfiles
 
 - name: include imported Vim configuration
   lineinfile:
@@ -25,6 +30,8 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  tags:
+    - configs
 
 - name: create subdirectory for Vim configuration
   file:
@@ -33,6 +40,8 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0750
+  tags:
+    - directories
 
 - name: download Vim theme Solarized
   get_url:
@@ -41,6 +50,9 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  tags:
+    - dotfiles
+    - online
 
 - name: configure Vim theme Solarized
   blockinfile:
@@ -53,11 +65,15 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  tags:
+    - configs
 
 - name: configure Vim as default system editor
   shell: |
     alternatives --install /usr/bin/editor editor /usr/bin/vim 1
     update-alternatives --set editor /usr/bin/vim
+  tags:
+    - configs
 
 - name: point editor variable to default system editor
   lineinfile:
@@ -68,4 +84,6 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0750
+  tags:
+    - configs
 

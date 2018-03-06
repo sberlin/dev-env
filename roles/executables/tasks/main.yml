@@ -7,6 +7,9 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0750
+  tags:
+    - scripts
+    - directories
 
 - name: copy executable files
   copy:
@@ -16,4 +19,6 @@
     group: "{{ username }}"
     mode: 0750
   with_fileglob: files/*
+  tags:
+    - scripts
 

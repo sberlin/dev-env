@@ -6,6 +6,9 @@
     state: latest
   notify:
     - restart Gnome
+  tags:
+    - packages
+    - online
 
 - name: configure Gnome by using dconf
   shell: |
@@ -13,4 +16,6 @@
     dconf load /
   args:
     stdin: "{{ lookup('file', 'files/dconf.ini') }}"
+  tags:
+    - configs
 

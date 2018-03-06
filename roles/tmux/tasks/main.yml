@@ -4,6 +4,9 @@
   package:
     name: tmux
     state: latest
+  tags:
+    - packages
+    - online
 
 - import_role:
     name: dotfiles
@@ -16,6 +19,8 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     force: yes
+  tags:
+    - dotfiles
 
 - name: include imported tmux configuration
   lineinfile:
@@ -25,6 +30,8 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  tags:
+    - configs
 
 - name: download tmux theme Solarized
   get_url:
@@ -33,6 +40,9 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  tags:
+    - dotfiles
+    - online
 
 - name: include downloaded tmux configuration
   lineinfile:
@@ -42,4 +52,6 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  tags:
+    - configs
 
