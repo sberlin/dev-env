@@ -1,0 +1,23 @@
+---
+
+packages:
+  - ansible
+  - glances
+  - groovy
+  - hostname
+  - htop
+  - inotify-tools
+  - iotop
+  - openjdk-8-jdk
+  - jq
+  - python-selinux
+  - nmap
+  - nodejs
+  - npm
+  - openssl
+  - strace
+  - xclip
+  - xsel
+
+package_gnome: gnome
+
