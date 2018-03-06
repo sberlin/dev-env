@@ -14,6 +14,8 @@
     dconf load /
   args:
     stdin: "{{ lookup('file', 'files/dconf.ini') }}"
+  become: yes
+  become_user: "{{ username }}"
   notify:
     - restart Gnome
   tags:
