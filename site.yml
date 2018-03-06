@@ -1,13 +1,5 @@
 ---
 
-- name: group by OS distribution
-  hosts: all
-  tasks:
-    - group_by:
-        key: "{{ ansible_distribution|lower }}"
-    - debug:
-        msg: found OS distribution {{ ansible_distribution|lower }}
-
 - import_playbook: system.yml
 - import_playbook: workstation.yml
 - import_playbook: peripherals.yml

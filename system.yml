@@ -1,5 +1,7 @@
 ---
 
+- import_playbook: setup.yml
+
 - name: install packages, create user, setup locale
   hosts: all
   gather_facts: true

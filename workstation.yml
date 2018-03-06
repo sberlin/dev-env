@@ -1,5 +1,7 @@
 ---
 
+- import_playbook: setup.yml
+
 - name: install workstation
   hosts: all
   gather_facts: true

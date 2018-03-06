@@ -1,0 +1,12 @@
+---
+
+- name: group by OS distribution
+  hosts: all
+  tasks:
+    - group_by:
+        key: "{{ ansible_distribution|lower }}"
+    - debug:
+        msg: found OS distribution {{ ansible_distribution|lower }}
+  tags:
+    - always
+
