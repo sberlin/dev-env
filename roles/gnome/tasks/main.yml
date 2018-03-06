@@ -1,0 +1,23 @@
+---
+
+- name: install or update Gnome
+  package:
+    name: "{{ package_gnome }}"
+    state: latest
+  tags:
+    - packages
+    - online
+
+- name: configure Gnome by using dconf
+  shell: |
+    export $(/usr/bin/dbus-launch)
+    dconf load /
+  args:
+    stdin: "{{ lookup('file', 'files/dconf.ini') }}"
+  become: yes
+  become_user: "{{ username }}"
+  notify:
+    - restart Gnome
+  tags:
+    - configs
+

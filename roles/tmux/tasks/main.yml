@@ -1,0 +1,57 @@
+---
+
+- name: install or update tmux
+  package:
+    name: tmux
+    state: latest
+  tags:
+    - packages
+    - online
+
+- import_role:
+    name: dotfiles
+
+- name: link imported tmux configuration
+  file:
+    src: /home/{{ username }}/git/dotfiles/.tmux.conf
+    dest: /home/{{ username }}/.tmux-{{ username }}.conf
+    state: link
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    force: yes
+  tags:
+    - dotfiles
+
+- name: include imported tmux configuration
+  lineinfile:
+    path: /home/{{ username }}/.tmux.conf
+    line: "source-file ~/.tmux-{{ username }}.conf"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
+
+- name: download tmux theme Solarized
+  get_url:
+    url: "https://raw.githubusercontent.com/seebi/tmux-colors-solarized/master/tmuxcolors-dark.conf"
+    dest: /home/{{ username }}/.tmux-solarized.conf
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - dotfiles
+    - online
+
+- name: include downloaded tmux configuration
+  lineinfile:
+    path: /home/{{ username }}/.tmux.conf
+    line: "source-file ~/.tmux-solarized.conf"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
+

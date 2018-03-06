@@ -1,0 +1,21 @@
+---
+
+- import_playbook: setup.yml
+
+- name: install packages, create user, setup locale
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  roles:
+    - role: common
+      tags: [ common ]
+    - role: docker
+      tags: [ docker ]
+  vars_prompt:
+    - name: password
+      prompt: "Enter the password to set for your user (omit to keep it)"
+      confirm: yes
+      private: yes
+  tags: [ system ]
+

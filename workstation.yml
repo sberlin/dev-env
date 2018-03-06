@@ -1,0 +1,26 @@
+---
+
+- import_playbook: setup.yml
+
+- name: install workstation
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  roles:
+    - role: git
+      tags: [ git ]
+    - role: bash
+      tags: [ bash ]
+    - role: executables
+      tags: [ executables ]
+    - role: tmux
+      tags: [ tmux ]
+    - role: vim
+      tags: [ vim ]
+    - role: gnome
+      tags: [ gnome, gui ]
+    - role: onedrive
+      tags: [ onedrive ]
+  tags: [ workstation ]
+

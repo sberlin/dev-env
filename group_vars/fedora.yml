@@ -1,0 +1,27 @@
+---
+
+package_groups:
+  - "@Development Tools"
+  - "@Fedora Workstation"
+  - "@System Tools"
+packages:
+  - ansible
+  - glances
+  - groovy
+  - hostname
+  - htop
+  - inotify-tools
+  - iotop
+  - java-1.8.0-openjdk
+  - jq
+  - libselinux-python
+  - nmap
+  - nodejs
+  - npm
+  - openssl
+  - strace
+  - xclip
+  - xsel
+
+package_gnome: "@GNOME"
+

@@ -1,0 +1,5 @@
+---
+
+username_git: "{{ username }}"
+dotfiles_repo: "https://github.com/{{ username_git }}/dotfiles.git"
+

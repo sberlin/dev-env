@@ -1,0 +1,17 @@
+---
+
+- name: configure peripherals
+  hosts: all
+  gather_facts: false
+  become: yes
+  become_user: root
+  tasks:
+    - import_role:
+        name: dotfiles
+    - name: start script for adjusting brightness on reboot
+      cron:
+        name: adjust-brightness
+        job: "while sleep 10; do /home/{{ username }}/bin/adjust-brightness.sh > /dev/null; done"
+        special_time: reboot
+  tags: [ peripherals ]
+

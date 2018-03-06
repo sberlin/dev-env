@@ -1,0 +1,38 @@
+---
+
+- name: install or update Bash
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - bash
+    - bash-completion
+  tags:
+    - packages
+    - online
+
+- import_role:
+    name: dotfiles
+
+- name: link imported Bash configuration
+  file:
+    src: /home/{{ username }}/git/dotfiles/.bashrc
+    path: /home/{{ username }}/.bashrc-{{ username }}
+    state: link
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    force: yes
+  tags:
+    - dotfiles
+
+- name: include imported Bash configuration
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    line: "source ~/.bashrc-{{ username }}"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  tags:
+    - configs
+

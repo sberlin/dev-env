@@ -1,0 +1,89 @@
+---
+
+- name: install or update Vim
+  package:
+    name: vim
+    state: latest
+  tags:
+    - packages
+    - online
+
+- import_role:
+    name: dotfiles
+
+- name: link imported Vim configuration
+  file:
+    src: /home/{{ username }}/git/dotfiles/.vimrc
+    dest: /home/{{ username }}/.vimrc-{{ username }}
+    state: link
+    force: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  tags:
+    - dotfiles
+
+- name: include imported Vim configuration
+  lineinfile:
+    path: /home/{{ username }}/.vimrc
+    line: "source ~/.vimrc-{{ username }}"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
+
+- name: create subdirectory for Vim configuration
+  file:
+    dest: /home/{{ username }}/.vim/colors/
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  tags:
+    - directories
+
+- name: download Vim theme Solarized
+  get_url:
+    url: "https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim"
+    dest: /home/{{ username }}/.vim/colors/solarized.vim
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - dotfiles
+    - online
+
+- name: configure Vim theme Solarized
+  blockinfile:
+    path: /home/{{ username }}/.vimrc-{{ username }}
+    block: |
+      syntax enable
+      set background=dark
+      colorscheme solarized
+    marker: '" {mark} ANSIBLE MANAGED BLOCK'
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
+
+- name: configure Vim as default system editor
+  shell: |
+    alternatives --install /usr/bin/editor editor /usr/bin/vim 1
+    update-alternatives --set editor /usr/bin/vim
+  tags:
+    - configs
+
+- name: point editor variable to default system editor
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    regexp: "^export EDITOR="
+    line: "export EDITOR=/usr/bin/editor"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  tags:
+    - configs
+

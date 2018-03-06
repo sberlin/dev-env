@@ -1,0 +1,130 @@
+---
+
+- name: install build dependencies
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - libcurl-devel
+    - sqlite-devel
+  tags:
+    - packages
+    - online
+
+- name: install dlang
+  shell: curl -fsS https://dlang.org/install.sh | bash -s dmd
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - packages
+    - online
+
+- name: clone onedrive sources
+  git:
+    repo: "https://github.com/skilion/onedrive"
+    dest: /home/{{ username }}/git/onedrive
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - git
+    - online
+
+- name: compile onedrive
+  shell: |
+    source /home/{{ username }}/dlang/dmd-*/activate
+    make
+  args:
+    chdir: /home/{{ username }}/git/onedrive
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - make
+
+- name: install onedrive
+  shell: |
+    make install
+  args:
+    chdir: /home/{{ username }}/git/onedrive
+  tags:
+    - make
+
+- name: create configuration directory
+  file:
+    path: /home/{{ username }}/.config/onedrive/
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  tags:
+    - directories
+
+- name: copy default configuration
+  copy:
+    src: /home/{{ username }}/git/onedrive/config
+    dest: /home/{{ username }}/.config/onedrive/config
+    backup: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
+
+- name: change onedrive working directory
+  lineinfile:
+    path: /home/{{ username }}/.config/onedrive/config
+    regexp: "^sync_dir ="
+    line: 'sync_dir = "~/onedrive"'
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
+
+- name: get user id
+  command: id -u {{ username }}
+  become: yes
+  become_user: "{{ username }}"
+  register: uid
+  when: ansible_service_mgr == 'systemd'
+  tags:
+    - service
+    - systemd
+
+- name: enable use of user-specific systemd without session
+  command: loginctl enable-linger {{ username }}
+  when: ansible_service_mgr == 'systemd'
+  tags:
+    - service
+    - systemd
+
+- name: use onedrive as a service
+  systemd:
+    name: onedrive
+    enabled: yes
+    state: started
+    user: yes
+  become: yes
+  become_user: "{{ username }}"
+  environment:
+    XDG_RUNTIME_DIR: /run/user/{{ uid.stdout }}
+  when: ansible_service_mgr == 'systemd'
+  tags:
+    - service
+    - systemd
+
+- name: disable use of user-specific systemd without session
+  command: loginctl disable-linger {{ username }}
+  when: ansible_service_mgr == 'systemd'
+  tags:
+    - service
+    - systemd
+
+- name: use onedrive as a service
+  service:
+    name: onedrive
+    enabled: yes
+    state: started
+  when: ansible_service_mgr != 'systemd'
+  tags:
+    - service
+

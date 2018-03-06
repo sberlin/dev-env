@@ -1,0 +1,98 @@
+---
+
+- name: install or update Git
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - git
+    - meld
+  tags:
+    - packages
+    - online
+
+- name: create user's Git directory
+  file:
+    path: /home/{{ username }}/git
+    state: directory
+    mode: 0750
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  tags:
+    - directories
+
+- import_role:
+    name: dotfiles
+
+- name: link imported Git configuration
+  file:
+    src: /home/{{ username }}/git/dotfiles/.gitconfig
+    dest: /home/{{ username }}/.gitconfig-{{ username }}
+    state: link
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    force: yes
+  tags:
+    - dotfiles
+
+- name: include imported Git configuration
+  git_config:
+    scope: global
+    name: include.path
+    value: /home/{{ username }}/.gitconfig-{{ username }}
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - configs
+
+- name: download Git Bash prompt
+  get_url:
+    url: "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
+    dest: /home/{{ username }}/.git-prompt.sh
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  tags:
+    - scripts
+    - online
+
+- name: include Git Bash prompt in .bashrc
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    line: "source ~/.git-prompt.sh"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  tags:
+    - configs
+
+- name: set Git Bash prompt modifiers in .bashrc
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  with_items:
+    - line: "export GIT_PS1_SHOWDIRTYSTATE=1"
+      regexp: "^export GIT_PS1_SHOWDIRTYSTATE="
+    - line: "export GIT_PS1_SHOWUNTRACKEDFILES=1"
+      regexp: "^export GIT_PS1_SHOWUNTRACKEDFILES="
+    - line: 'export GIT_PS1_SHOWUPSTREAM="verbose"'
+      regexp: "^export GIT_PS1_SHOWUPSTREAM="
+  tags:
+    - configs
+
+- name: extend Bash prompt variable
+  lineinfile:
+    path: /home/{{ username }}/.bashrc
+    line: 'export PS1=${PS1/\w/\w\[\033[1;31m\]$(__git_ps1 " (%s)" 2>/dev/null)}'
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  tags:
+    - configs
+

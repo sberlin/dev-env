@@ -1,0 +1,90 @@
+---
+
+- name: install package groups
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ package_groups }}"
+  when: package_groups is defined
+  tags:
+    - packages
+    - online
+
+- name: install packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ packages }}"
+  when: packages is defined
+  tags:
+    - packages
+    - online
+
+- name: update already installed packages
+  action: "{{ ansible_pkg_mgr }} name=* state=latest"
+  tags:
+    - packages
+
+- name: set hostname to {{ hostname }}
+  hostname:
+    name: "{{ hostname }}"
+  tags:
+    - configs
+
+- name: create user {{ username }} with ssh key
+  user:
+    name: "{{ username }}"
+    groups: wheel
+    append: yes
+    shell: /bin/bash
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
+    ssh_key_comment: "{{ username }}@{{ hostname }}"
+  tags:
+    - user
+
+- name: set password for user {{ username }}
+  user:
+    name: "{{ username }}"
+    password: "{{ password|password_hash('sha512') }}"
+  when: password != ''
+  tags:
+    - user
+    - password
+
+- name: add wheel group to sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s
+  tags:
+    - user
+    - configs
+    - admin
+
+- name: set locale to {{ locale }}
+  command: localectl set-locale LANG={{ locale }}
+  when: locale is defined
+  tags:
+    - configs
+    - i18n
+
+- name: set keymap to {{ keymap }}
+  shell: |
+    localectl set-keymap {{ keymap }}
+    localectl set-x11-keymap {{ keymap }}
+  when: keymap is defined
+  tags:
+    - configs
+    - i18n
+
+- name: set timezone to {{ timezone }}
+  timezone:
+    name: "{{ timezone }}"
+  when: timezone is defined
+  tags:
+    - configs
+    - i18n
+
