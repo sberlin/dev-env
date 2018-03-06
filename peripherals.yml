@@ -13,4 +13,5 @@
         name: adjust-brightness
         job: "while sleep 10; do /home/{{ username }}/bin/adjust-brightness.sh > /dev/null; done"
         special_time: reboot
+  tags: [ peripherals ]
 

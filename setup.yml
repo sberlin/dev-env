@@ -7,6 +7,5 @@
         key: "{{ ansible_distribution|lower }}"
     - debug:
         msg: found OS distribution {{ ansible_distribution|lower }}
-  tags:
-    - always
+  tags: [ always ]
 

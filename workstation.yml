@@ -8,12 +8,19 @@
   become: yes
   become_user: root
   roles:
-    - git
-    - bash
-    - executables
-    - tmux
-    - vim
+    - role: git
+      tags: [ git ]
+    - role: bash
+      tags: [ bash ]
+    - role: executables
+      tags: [ executables ]
+    - role: tmux
+      tags: [ tmux ]
+    - role: vim
+      tags: [ vim ]
     - role: gnome
-      tags: [ gui ]
-    - onedrive
+      tags: [ gnome, gui ]
+    - role: onedrive
+      tags: [ onedrive ]
+  tags: [ workstation ]
 
