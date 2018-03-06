@@ -4,7 +4,7 @@
 
 - name: install workstation
   hosts: all
-  gather_facts: true
+  gather_facts: yes
   become: yes
   become_user: root
   roles:

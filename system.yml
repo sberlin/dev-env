@@ -4,7 +4,7 @@
 
 - name: install packages, create user, setup locale
   hosts: all
-  gather_facts: true
+  gather_facts: yes
   become: yes
   become_user: root
   roles:

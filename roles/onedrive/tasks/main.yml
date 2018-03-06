@@ -100,7 +100,7 @@
 - name: use onedrive as a service
   systemd:
     name: onedrive
-    enabled: true
+    enabled: yes
     state: started
     user: yes
   become: yes
@@ -122,7 +122,7 @@
 - name: use onedrive as a service
   service:
     name: onedrive
-    enabled: true
+    enabled: yes
     state: started
   when: ansible_service_mgr != 'systemd'
   tags:
