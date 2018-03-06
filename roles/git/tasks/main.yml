@@ -40,6 +40,8 @@
     scope: global
     name: include.path
     value: /home/{{ username }}/.gitconfig-{{ username }}
+  become: yes
+  become_user: "{{ username }}"
   tags:
     - configs
 
