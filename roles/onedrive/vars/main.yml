@@ -1,0 +1,10 @@
+---
+
+dependencies:
+  ubuntu:
+    - libcurl4-openssl-dev
+    - libsqlite3-dev
+  fedora:
+    - libcurl-devel
+    - sqlite-devel
+

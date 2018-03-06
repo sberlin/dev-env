@@ -4,9 +4,7 @@
   package:
     name: "{{ item }}"
     state: latest
-  with_items:
-    - libcurl-devel
-    - sqlite-devel
+  with_items: "{{ dependencies[ansible_distribution|lower] }}"
   tags:
     - packages
     - online
