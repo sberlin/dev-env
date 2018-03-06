@@ -42,7 +42,7 @@
 - name: create user {{ username }} with ssh key
   user:
     name: "{{ username }}"
-    groups: wheel
+    groups: "{{ (ansible_os_family == 'RedHat')|ternary('wheel', 'sudo') }}"
     append: yes
     shell: /bin/bash
     generate_ssh_key: yes
