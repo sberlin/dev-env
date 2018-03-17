@@ -1,0 +1,44 @@
+---
+
+- name: install or update Zsh
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - zsh
+  tags:
+    - packages
+    - online
+
+- import_role:
+    name: dotfiles
+
+- name: link imported Zsh configuration
+  file:
+    src: /home/{{ username }}/git/dotfiles/.zshrc
+    path: /home/{{ username }}/.zshrc-{{ username }}
+    state: link
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    force: yes
+  tags:
+    - dotfiles
+
+- name: include imported Zsh configuration
+  lineinfile:
+    path: /home/{{ username }}/.zshrc
+    line: "source ~/.zshrc-{{ username }}"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  tags:
+    - configs
+
+- name: set default shell for user {{ username }}
+  user:
+    name: "{{ username }}"
+    shell: /bin/zsh
+  tags:
+    - user
+
