@@ -10,8 +10,8 @@
   roles:
     - role: git
       tags: [ git ]
-    - role: bash
-      tags: [ bash ]
+    - role: zsh
+      tags: [ zsh ]
     - role: executables
       tags: [ executables ]
     - role: tmux
