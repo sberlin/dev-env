@@ -36,3 +36,10 @@
   tags:
     - configs
 
+- name: set default shell for user {{ username }}
+  user:
+    name: "{{ username }}"
+    shell: /bin/bash
+  tags:
+    - user
+

@@ -44,7 +44,6 @@
     name: "{{ username }}"
     groups: "{{ (ansible_os_family == 'RedHat')|ternary('wheel', 'sudo') }}"
     append: yes
-    shell: /bin/bash
     generate_ssh_key: yes
     ssh_key_bits: 4096
     ssh_key_comment: "{{ username }}@{{ hostname }}"
