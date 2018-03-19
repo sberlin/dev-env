@@ -81,3 +81,27 @@
   tags:
     - configs
 
+- name: check for existing Vim configuration
+  stat:
+    path: /home/{{ username }}/.vimrc
+  register: vim_conf
+  tags:
+    - configs
+
+- name: configure Vim for Powerline usage
+  lineinfile:
+    path: "{{ vim_conf.stat.path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+  with_items:
+    - regexp: "^set runtimepath\\+=.*powerline.*$"
+      line: "set runtimepath+={{ powerline_dir.stdout }}/powerline/bindings/vim"
+    - regexp: "^set laststatus=\\d$"
+      line: "set laststatus=2"
+  when: vim_conf.stat.exists
+  tags:
+    - configs
+
