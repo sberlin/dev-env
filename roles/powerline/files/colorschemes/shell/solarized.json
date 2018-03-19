@@ -1,0 +1,6 @@
+{
+    "name": "Solarized dark for shell",
+    "groups": {
+        "transparent":               { "fg": "solarized:base03",  "bg": "solarized:base03", "attrs": [] },
+    }
+}
