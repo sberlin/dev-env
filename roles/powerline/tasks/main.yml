@@ -105,3 +105,31 @@
   tags:
     - configs
 
+- name: check for existing Bash configuration
+  stat:
+    path: /home/{{ username }}/.bashrc
+  register: bash_conf
+  tags:
+    - configs
+
+- name: configure Bash for Powerline usage
+  lineinfile:
+    path: "{{ bash_conf.stat.path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+  with_items:
+    - regexp: "^powerline-daemon"
+      line: "powerline-daemon -q"
+    - regexp: "^POWERLINE_BASH_CONTINUATION="
+      line: "POWERLINE_BASH_CONTINUATION=1"
+    - regexp: "^POWERLINE_BASH_SELECT="
+      line: "POWERLINE_BASH_SELECT=1"
+    - regexp: "^source .*powerline.sh"
+      line: "source {{ powerline_dir.stdout }}/powerline/bindings/bash/powerline.sh"
+  when: bash_conf.stat.exists
+  tags:
+    - configs
+
