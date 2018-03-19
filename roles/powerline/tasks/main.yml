@@ -53,3 +53,13 @@
   tags:
     - configs
 
+- name: copy Powerline configuration
+  file:
+    src: files/
+    path: /home/{{ username }}/.config/powerline/
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  tags:
+    - configs
+
