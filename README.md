@@ -9,9 +9,8 @@
 * [vagrant-proxyconf](https://github.com/tmatilai/vagrant-proxyconf)
 
 ## Configuration
-For local execution append Ansible hosts:
-```
-# /etc/ansible/hosts
-localhost ansible_connection=local
+For local execution use:
+```bash
+$ ansible-playbook --inventory localhost, --connection local setup.yml
 ```
 
