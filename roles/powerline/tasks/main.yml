@@ -63,3 +63,21 @@
   tags:
     - configs
 
+- name: check for existing Tmux configuration
+  stat:
+    path: /home/{{ username }}/.tmux.conf
+  register: tmux_conf
+  tags:
+    - configs
+
+- name: configure Tmux for Powerline usage
+  lineinfile:
+    path: "{{ tmux_conf.stat.path }}"
+    line: "source-file {{ powerline_dir.stdout }}/powerline/bindings/tmux/powerline.conf"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+  when: tmux_conf.stat.exists
+  tags:
+    - configs
+
