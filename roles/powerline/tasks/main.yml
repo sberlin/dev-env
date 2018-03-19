@@ -1,0 +1,55 @@
+---
+
+- name: install or update Powerline and addons
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - powerline-status
+    - powerline-gitstatus
+  tags:
+    - packages
+    - online
+
+- name: register Powerline installation directory
+  shell: >
+    (pip show powerline-status || pip3 show powerline-status)
+    | grep --perl-regexp --only-matching "(?<=^Location: ).*$"
+  register: powerline_dir
+
+- name: create Powerline font directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+  with_items:
+    - /home/{{ username }}/.local/share/fonts/
+    - /home/{{ username }}/.config/fontconfig/conf.d/
+  tags:
+    - directories
+
+- name: download Powerline fonts
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+  with_items:
+    - url: "https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf"
+      dest: /home/{{ username }}/.local/share/fonts/
+    - url: "https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf"
+      dest: /home/{{ username }}/.config/fontconfig/conf.d/
+  tags:
+    - configs
+    - online
+
+- name: update font cache
+  command: fc-cache -vf /home/{{ username }}/.local/share/fonts/
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - configs
+

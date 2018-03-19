@@ -12,6 +12,8 @@
       tags: [ git ]
     - role: zsh
       tags: [ zsh ]
+    - role: powerline
+      tags: [ powerline ]
     - role: executables
       tags: [ executables ]
     - role: tmux
