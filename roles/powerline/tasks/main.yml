@@ -133,3 +133,31 @@
   tags:
     - configs
 
+- name: check for existing Zsh configuration
+  stat:
+    path: /home/{{ username }}/.zshrc
+  register: zsh_conf
+  tags:
+    - configs
+
+- name: configure Zsh for Powerline usage
+  lineinfile:
+    path: "{{ zsh_conf.stat.path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+  with_items:
+    - regexp: "^powerline-daemon"
+      line: "powerline-daemon -q"
+    - regexp: "^POWERLINE_BASH_CONTINUATION="
+      line: "POWERLINE_BASH_CONTINUATION=1"
+    - regexp: "^POWERLINE_BASH_SELECT="
+      line: "POWERLINE_BASH_SELECT=1"
+    - regexp: "^source .*powerline.zsh"
+      line: "source {{ powerline_dir.stdout }}/powerline/bindings/zsh/powerline.zsh"
+  when: zsh_conf.stat.exists
+  tags:
+    - configs
+
