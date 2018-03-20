@@ -35,6 +35,34 @@
   tags:
     - configs
 
+- name: download oh-my-zsh
+  git:
+    repo: "https://github.com/robbyrussell/oh-my-zsh.git"
+    dest: /home/{{ username }}/git/oh-my-zsh
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - git
+    - online
+    - oh-my-zsh
+
+- name: set path to oh-my-zsh directory
+  lineinfile:
+    path: /home/{{ username }}/.zshrc-{{ username }}
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  with_items:
+    - regexp: "^export ZSH="
+      line: "export ZSH=~/git/oh-my-zsh"
+    - regexp: "^source \\$ZSH/"
+      line: "source $ZSH/oh-my-zsh.sh"
+  tags:
+    - configs
+    - oh-my-zsh
+
 - name: set default shell for user {{ username }}
   user:
     name: "{{ username }}"
