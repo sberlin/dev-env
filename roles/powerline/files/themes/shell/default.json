@@ -54,7 +54,7 @@
                         "function": "powerline.segments.common.time.date",
                         "priority": 10,
                         "args": {
-                            "format": "%d.%m.%y %H:%m:%S"
+                            "format": "%d.%m.%y %H:%M:%S"
                         }
                     }
                 ]
