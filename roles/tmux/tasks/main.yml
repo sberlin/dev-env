@@ -55,3 +55,24 @@
   tags:
     - configs
 
+- name: download tmux plugin manager
+  git:
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: /home/{{ username }}/git/tpm
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - git
+    - online
+
+- name: include downloaded tmux plugin manager
+  lineinfile:
+    path: /home/{{ username }}/.tmux.conf
+    line: "run ~/git/tpm/tpm"
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
+
