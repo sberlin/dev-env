@@ -56,7 +56,7 @@
 
 - name: configure Vim theme Solarized
   blockinfile:
-    path: /home/{{ username }}/.vimrc-{{ username }}
+    path: /home/{{ username }}/.vimrc
     block: |
       syntax enable
       set background=dark
