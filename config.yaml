@@ -8,9 +8,9 @@ configs:
     hostname: "ubuntu-desktop"
   desktop:
     gui: true
-    basebox: "generic/fedora27"
+    basebox: "generic/fedora28"
     hostname: "fedora-desktop"
   server:
     gui: false
-    basebox: "generic/fedora27"
+    basebox: "generic/fedora28"
     hostname: "fedora-server"
