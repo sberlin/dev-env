@@ -42,3 +42,24 @@
   tags:
     - configs
 
+- name: include profile for konsole
+  copy:
+    src: files/konsole.profile
+    dest: /home/{{ username }}/.local/share/konsole/custom.profile
+    backup: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
+
+- name: include configurations for konsole
+  copy:
+    src: files/konsolerc
+    dest: /home/{{ username }}/.config/konsolerc
+    backup: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
