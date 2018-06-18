@@ -8,3 +8,24 @@
     - packages
     - online
 
+- name: create subdirectory for KDE configuration
+  file:
+    dest: /home/{{ username }}/.kde/share/config
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0750
+  tags:
+    - directories
+
+- name: configure KDE by placing kdeglobals
+  copy:
+    src: files/kdeglobals
+    dest: /home/{{ username }}/.kde/share/config/kdeglobals
+    backup: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  tags:
+    - configs
+
