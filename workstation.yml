@@ -20,8 +20,10 @@
       tags: [ tmux ]
     - role: vim
       tags: [ vim ]
-    - role: gnome
-      tags: [ gnome, gui ]
+#    - role: gnome
+#      tags: [ gnome, gui ]
+    - role: kde
+      tags: [ kde, gui ]
     - role: onedrive
       tags: [ onedrive ]
   tags: [ workstation ]
