@@ -23,4 +23,5 @@ packages:
   - xsel
 
 package_gnome: gnome
+package_kde: kde-full
 

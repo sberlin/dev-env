@@ -1,0 +1,10 @@
+---
+
+- name: install or update KDE
+  package:
+    name: "{{ package_kde }}"
+    state: latest
+  tags:
+    - packages
+    - online
+

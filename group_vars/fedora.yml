@@ -25,4 +25,5 @@ packages:
   - xsel
 
 package_gnome: "@GNOME"
+package_kde: "@KDE-DESKTOP"
 
