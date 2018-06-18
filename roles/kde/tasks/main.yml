@@ -29,3 +29,16 @@
   tags:
     - configs
 
+- name: include custom desktop shortcuts
+  lineinfile:
+    path: /home/{{ username }}/.config/kglobalshortcutsrc
+    create: yes
+    backup: yes
+    line: "{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  with_lines: echo "{{ lookup('file', 'files/shortcuts.kksrc') }}"
+  tags:
+    - configs
+
