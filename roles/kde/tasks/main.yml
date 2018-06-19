@@ -28,7 +28,7 @@
 
 - name: configure KDE by modifying kdeglobals
   ini_file:
-    path: /home/{{ username }}/.kde/share/config/kdeglobals
+    path: /home/{{ username }}/.config/kdeglobals
     section: "{{ item.0.section }}"
     option: "{{ item.1.key }}"
     value: "{{ item.1.value }}"
