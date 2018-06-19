@@ -22,6 +22,7 @@ packages:
   - openssl
   - strace
   - xclip
+  - xorg-x11-drv-synaptics-legacy
   - xsel
 
 package_gnome: "@GNOME"
