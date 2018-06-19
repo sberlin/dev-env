@@ -1,0 +1,7 @@
+---
+
+- name: restart KDE
+  service:
+    name: kdm
+    enabled: yes
+    state: restarted
