@@ -26,49 +26,99 @@
   tags:
     - directories
 
-- name: configure KDE by placing kdeglobals
-  copy:
-    src: files/kdeglobals
-    dest: /home/{{ username }}/.kde/share/config/kdeglobals
+- name: configure KDE by modifying kdeglobals
+  ini_file:
+    path: /home/{{ username }}/.kde/share/config/kdeglobals
+    section: "{{ item.0.section }}"
+    option: "{{ item.1.key }}"
+    value: "{{ item.1.value }}"
     backup: yes
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  with_subelements:
+    - "{{ kdeglobals }}"
+    - options
   tags:
     - configs
 
 - name: include custom desktop shortcuts
-  lineinfile:
+  ini_file:
     path: /home/{{ username }}/.config/kglobalshortcutsrc
-    create: yes
+    section: "{{ item.0.section }}"
+    option: "{{ item.1.key }}"
+    value: "{{ item.1.value }}"
     backup: yes
-    line: "{{ item }}"
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
-  with_lines: echo "{{ lookup('file', 'files/shortcuts.kksrc') }}"
+  with_subelements:
+    - "{{ kksrc }}"
+    - options
   tags:
     - configs
 
 - name: include profile for konsole
-  copy:
-    src: files/konsole.profile
-    dest: /home/{{ username }}/.local/share/konsole/custom.profile
+  ini_file:
+    path: /home/{{ username }}/.local/share/konsole/custom.profile
+    section: "{{ item.0.section }}"
+    option: "{{ item.1.key }}"
+    value: "{{ item.1.value }}"
     backup: yes
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  with_subelements:
+    - "{{ konsole.profile }}"
+    - options
   tags:
     - configs
 
 - name: include configurations for konsole
-  copy:
-    src: files/konsolerc
-    dest: /home/{{ username }}/.config/konsolerc
+  ini_file:
+    path: /home/{{ username }}/.config/konsolerc
+    section: "{{ item.0.section }}"
+    option: "{{ item.1.key }}"
+    value: "{{ item.1.value }}"
     backup: yes
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0640
+  with_subelements:
+    - "{{ konsole.rc }}"
+    - options
+  tags:
+    - configs
+
+- name: modify input device behavior
+  ini_file:
+    path: /home/{{ username }}/.config/kcminputrc
+    section: "{{ item.0.section }}"
+    option: "{{ item.1.key }}"
+    value: "{{ item.1.value }}"
+    backup: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  with_subelements:
+    - "{{ kcminput }}"
+    - options
+  tags:
+    - configs
+
+- name: modify touchpad behavior
+  ini_file:
+    path: /home/{{ username }}/.config/touchpad
+    section: "{{ item.0.section }}"
+    option: "{{ item.1.key }}"
+    value: "{{ item.1.value }}"
+    backup: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  with_subelements:
+    - "{{ touchpad }}"
+    - options
   tags:
     - configs
 

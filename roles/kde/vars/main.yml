@@ -1,0 +1,376 @@
+---
+
+kdeglobals:
+  - section: "ColorEffects:Disabled"
+    options:
+      - key: Color
+        value: 56,56,56
+      - key: ColorAmount
+        value: 0
+      - key: ColorEffect
+        value: 0
+      - key: ContrastAmount
+        value: 0.65
+      - key: ContrastEffect
+        value: 1
+      - key: IntensityAmount
+        value: 0.1
+      - key: IntensityEffect
+        value: 2
+
+  - section: "ColorEffects:Inactive"
+    options:
+      - key: ChangeSelectionColor
+        value: true
+      - key: Color
+        value: 112,111,110
+      - key: ColorAmount
+        value: 0.025
+      - key: ColorEffect
+        value: 2
+      - key: ContrastAmount
+        value: 0.1
+      - key: ContrastEffect
+        value: 2
+      - key: Enable
+        value: false
+      - key: IntensityAmount
+        value: 0
+      - key: IntensityEffect
+        value: 0
+
+  - section: "Colors:Button"
+    options:
+      - key: BackgroundAlternate
+        value: 189,195,199
+      - key: BackgroundNormal
+        value: 239,240,241
+      - key: DecorationFocus
+        value: 61,174,233
+      - key: DecorationHover
+        value: 147,206,233
+      - key: ForegroundActive
+        value: 61,174,233
+      - key: ForegroundInactive
+        value: 127,140,141
+      - key: ForegroundLink
+        value: 41,128,185
+      - key: ForegroundNegative
+        value: 218,68,83
+      - key: ForegroundNeutral
+        value: 246,116,0
+      - key: ForegroundNormal
+        value: 35,38,39
+      - key: ForegroundPositive
+        value: 39,174,96
+      - key: ForegroundVisited
+        value: 127,140,141
+
+  - section: "Colors:Complementary"
+    options:
+      - key: BackgroundAlternate
+        value: 59,64,69
+      - key: BackgroundNormal
+        value: 49,54,59
+      - key: DecorationFocus
+        value: 30,146,255
+      - key: DecorationHover
+        value: 61,174,230
+      - key: ForegroundActive
+        value: 147,206,233
+      - key: ForegroundInactive
+        value: 175,176,179
+      - key: ForegroundLink
+        value: 61,174,230
+      - key: ForegroundNegative
+        value: 231,76,60
+      - key: ForegroundNeutral
+        value: 253,188,75
+      - key: ForegroundNormal
+        value: 239,240,241
+      - key: ForegroundPositive
+        value: 46,204,113
+      - key: ForegroundVisited
+        value: 61,174,230
+
+  - section: "Colors:Selection"
+    options:
+      - key: BackgroundAlternate
+        value: 29,153,243
+      - key: BackgroundNormal
+        value: 61,174,233
+      - key: DecorationFocus
+        value: 61,174,233
+      - key: DecorationHover
+        value: 147,206,233
+      - key: ForegroundActive
+        value: 252,252,252
+      - key: ForegroundInactive
+        value: 239,240,241
+      - key: ForegroundLink
+        value: 253,188,75
+      - key: ForegroundNegative
+        value: 218,68,83
+      - key: ForegroundNeutral
+        value: 246,116,0
+      - key: ForegroundNormal
+        value: 252,252,252
+      - key: ForegroundPositive
+        value: 39,174,96
+      - key: ForegroundVisited
+        value: 189,195,199
+
+  - section: "Colors:Tooltip"
+    options:
+      - key: BackgroundAlternate
+        value: 77,77,77
+      - key: BackgroundNormal
+        value: 35,38,39
+      - key: DecorationFocus
+        value: 61,174,233
+      - key: DecorationHover
+        value: 147,206,233
+      - key: ForegroundActive
+        value: 61,174,233
+      - key: ForegroundInactive
+        value: 189,195,199
+      - key: ForegroundLink
+        value: 41,128,185
+      - key: ForegroundNegative
+        value: 218,68,83
+      - key: ForegroundNeutral
+        value: 246,116,0
+      - key: ForegroundNormal
+        value: 252,252,252
+      - key: ForegroundPositive
+        value: 39,174,96
+      - key: ForegroundVisited
+        value: 127,140,141
+
+  - section: "Colors:View"
+    options:
+      - key: BackgroundAlternate
+        value: 239,240,241
+      - key: BackgroundNormal
+        value: 252,252,252
+      - key: DecorationFocus
+        value: 61,174,233
+      - key: DecorationHover
+        value: 147,206,233
+      - key: ForegroundActive
+        value: 61,174,233
+      - key: ForegroundInactive
+        value: 127,140,141
+      - key: ForegroundLink
+        value: 41,128,185
+      - key: ForegroundNegative
+        value: 218,68,83
+      - key: ForegroundNeutral
+        value: 246,116,0
+      - key: ForegroundNormal
+        value: 35,38,39
+      - key: ForegroundPositive
+        value: 39,174,96
+      - key: ForegroundVisited
+        value: 127,140,141
+
+  - section: "Colors:Window"
+    options:
+      - key: BackgroundAlternate
+        value: 189,195,199
+      - key: BackgroundNormal
+        value: 239,240,241
+      - key: DecorationFocus
+        value: 61,174,233
+      - key: DecorationHover
+        value: 147,206,233
+      - key: ForegroundActive
+        value: 61,174,233
+      - key: ForegroundInactive
+        value: 127,140,141
+      - key: ForegroundLink
+        value: 41,128,185
+      - key: ForegroundNegative
+        value: 218,68,83
+      - key: ForegroundNeutral
+        value: 246,116,0
+      - key: ForegroundNormal
+        value: 35,38,39
+      - key: ForegroundPositive
+        value: 39,174,96
+      - key: ForegroundVisited
+        value: 127,140,141
+
+  - section: General
+    options:
+      - key: ColorScheme
+        value: Breeze
+      - key: Name
+        value: Breeze custom
+      - key: XftAntialias
+        value: true
+      - key: XftHintStyle
+        value: hintmedium
+      - key: XftSubPixel
+        value: none
+      - key: font
+        value: Sans Serif,10,-1,5,50,0,0,0,0,0
+      - key: menuFont
+        value: Sans Serif,10,-1,5,50,0,0,0,0,0
+      - key: shadeSortColumn
+        value: true
+      - key: smallestReadableFont
+        value: Sans Serif,8,-1,5,50,0,0,0,0,0
+      - key: toolBarFont
+        value: Sans Serif,10,-1,5,50,0,0,0,0,0
+      - key: widgetStyle
+        value: breeze
+
+  - section: Icons
+    options:
+      - key: Theme
+        value: breeze
+
+  - section: WM
+    options:
+      - key: activeBackground
+        value: 231,231,232
+      - key: activeBlend
+        value: 75,71,67
+      - key: activeForeground
+        value: 75,71,67
+      - key: inactiveBackground
+        value: 239,240,241
+      - key: inactiveBlend
+        value: 75,71,67
+      - key: inactiveForeground
+        value: 189,195,199
+
+konsole:
+  profile:
+    - section: Appearance
+      options:
+        - key: ColorScheme
+          value: Solarized
+        - key: Font
+          value: Liberation Mono,11,-1,5,50,0,0,0,0,0,Regular
+
+    - section: General
+      options:
+        - key: Name
+          value: custom
+        - key: Parent
+          value: FALLBACK/
+
+    - section: Interaction Options
+      options:
+        - key: AutoCopySelectedText
+          value: true
+        - key: OpenLinksByDirectClickEnabled
+          value: true
+
+    - section: Scrolling
+      options:
+        - key: HistoryMode
+          value: 1
+        - key: ScrollBarPosition
+          value: 2
+
+  rc:
+    - section: Desktop Entry
+      options:
+        - key: DefaultProfile
+          value: custom.profile
+
+    - section: KonsoleWindow
+      options:
+        - key: ShowAppNameOnTitleBar
+          value: false
+        - key: ShowMenuBarByDefault
+          value: false
+
+    - section: MainWindow
+      options:
+        - key: Height 1200
+          value: 1200
+        - key: ToolBarsMovable
+          value: Disabled
+        - key: Width 1920
+          value: 1920
+        - key: Window-Maximized 1080x1920
+          value: true
+        - key: Window-Maximized 1200x1920
+          value: true
+
+    - section: TabBar
+      options:
+        - key: ShowQuickButtons
+          value: true
+        - key: TabBarPosition
+          value: Top
+        - key: TabBarVisibility
+          value: ShowTabBarWhenNeeded
+
+kksrc:
+  - section: ksmserver
+    options:
+      - key: Lock Session
+        value: Meta+L\tScreensaver,Ctrl+Alt+L\tScreensaver,Lock Session
+  - section: kwin
+    options:
+      - key: MoveZoomDown
+        value: ",Meta+Down,Move Zoomed Area Downwards"
+      - key: MoveZoomUp
+        value: ",Meta+Left,Move Zoomed Area to Left"
+      - key: Walk Through Windows
+        value: Alt+Tab,none,Walk Through Windows
+      - key: Walk Through Windows (Reverse)
+        value: Alt+Shift+Backtab,none,Walk Through Windows (Reverse)
+      - key: Window Maximize
+        value: Meta+Up,none,Maximize Window
+      - key: Window Minimize
+        value: Meta+Down,none,Minimize Window
+      - key: Window One Desktop Down
+        value: Meta+Shift+Down,none,Window One Desktop Down
+      - key: Window One Desktop Up
+        value: Meta+Shift+Up,none,Window One Desktop Up
+      - key: Window One Desktop to the Left
+        value: Meta+Shift+Left,none,Window One Desktop to the Left
+      - key: Window One Desktop to the Right
+        value: Meta+Shift+Right,none,Window One Desktop to the Right
+      - key: Window to Next Screen
+        value: Meta+Right,none,Window to Next Screen
+      - key: Window to Previous Screen
+        value: Meta+Left,none,Window to Previous Screen
+
+kcminput:
+  - section: Keyboard
+    options:
+      - key: NumLock
+        value: 0
+  - section: Mouse
+    options:
+      - key: cursorTheme
+        value: Adwaita
+
+touchpad:
+  - section: parameters
+    options:
+      - key: CircScrollDelta
+        value: 5.73
+      - key: HorizTwoFingerScroll
+        value: true
+      - key: MaxSpeed
+        value: 4.305139261599723
+      - key: MaxTapMove
+        value: 3.9
+      - key: MinSpeed
+        value: 1.3354830332409973
+      - key: OneFingerTapButton
+        value: LeftButton
+      - key: ThreeFingerTapButton
+        value: MiddleButton
+      - key: TwoFingerTapButton
+        value: RightButton
+      - key: VertEdgeScroll
+        value: true
