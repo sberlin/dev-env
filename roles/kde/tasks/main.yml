@@ -2,8 +2,13 @@
 
 - name: install or update KDE
   package:
-    name: "{{ package_kde }}"
+    name: "{{ item }}"
     state: latest
+  with_items:
+    - "{{ package_kde }}"
+    - kdm
+    - switchdesk
+    - system-switch-displaymanager
   tags:
     - packages
     - online
