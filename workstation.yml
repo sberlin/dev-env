@@ -12,12 +12,12 @@
       tags: [ git ]
     - role: zsh
       tags: [ zsh ]
+    - role: tmux
+      tags: [ tmux ]
     - role: powerline
       tags: [ powerline ]
     - role: executables
       tags: [ executables ]
-    - role: tmux
-      tags: [ tmux ]
     - role: vim
       tags: [ vim ]
 #    - role: gnome

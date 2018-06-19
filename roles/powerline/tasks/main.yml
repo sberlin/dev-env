@@ -54,12 +54,14 @@
     - configs
 
 - name: copy Powerline configuration
-  file:
+  copy:
     src: files/
-    path: /home/{{ username }}/.config/powerline/
-    state: directory
+    dest: /home/{{ username }}/.config/powerline/
     owner: "{{ username }}"
     group: "{{ username }}"
+    mode: 0640
+    directory_mode: 0750
+    backup: yes
   tags:
     - configs
 
