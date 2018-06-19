@@ -122,7 +122,16 @@
   tags:
     - configs
 
-- name: switch from Gnome to KDE
-  shell: switchdesk kde && system-switch-displaymanager kdm
+- name: switch to KDE
+  shell: switchdesk kde
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - configs
+
+- name: switch to KDM
+  shell: system-switch-displaymanager kdm
   notify:
     - restart KDE
+  tags:
+    - configs
