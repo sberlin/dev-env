@@ -76,3 +76,13 @@
   tags:
     - configs
 
+- name: link imported tmux configuration for remote machines
+  file:
+    src: /home/{{ username }}/git/dotfiles/.tmux-remote.conf
+    dest: /home/{{ username }}/.tmux-remote.conf
+    state: link
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    force: yes
+  tags:
+    - dotfiles
