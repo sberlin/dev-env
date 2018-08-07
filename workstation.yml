@@ -9,17 +9,17 @@
   become_user: root
   roles:
     - role: git
-      tags: [ git ]
+      tags: [ git, server ]
     - role: zsh
-      tags: [ zsh ]
+      tags: [ zsh, server ]
     - role: tmux
-      tags: [ tmux ]
+      tags: [ tmux, server ]
     - role: powerline
-      tags: [ powerline ]
+      tags: [ powerline, server ]
     - role: executables
-      tags: [ executables ]
+      tags: [ executables, server ]
     - role: vim
-      tags: [ vim ]
+      tags: [ vim, server ]
 #    - role: gnome
 #      tags: [ gnome, gui ]
     - role: kde

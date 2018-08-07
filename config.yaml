@@ -12,5 +12,5 @@ configs:
     hostname: "fedora-desktop"
   server:
     gui: false
-    basebox: "generic/fedora28"
-    hostname: "fedora-server"
+    basebox: "generic/centos7"
+    hostname: "centos-server"
