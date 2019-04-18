@@ -2,9 +2,8 @@
 
 - name: install package groups
   package:
-    name: "{{ item }}"
+    name: "{{ package_groups }}"
     state: latest
-  with_items: "{{ package_groups }}"
   when: package_groups is defined
   tags:
     - packages

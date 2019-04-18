@@ -2,11 +2,10 @@
 
 - name: install or update Git
   package:
-    name: "{{ item }}"
+    name:
+      - git
+      - meld
     state: latest
-  with_items:
-    - git
-    - meld
   tags:
     - packages
     - online

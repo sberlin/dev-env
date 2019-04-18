@@ -2,9 +2,8 @@
 
 - name: install build dependencies
   package:
-    name: "{{ item }}"
+    name: "{{ dependencies[ansible_distribution|lower] }}"
     state: latest
-  with_items: "{{ dependencies[ansible_distribution|lower] }}"
   tags:
     - packages
     - online

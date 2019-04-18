@@ -2,11 +2,10 @@
 
 - name: install or update Bash
   package:
-    name: "{{ item }}"
+    name:
+      - bash
+      - bash-completion
     state: latest
-  with_items:
-    - bash
-    - bash-completion
   tags:
     - packages
     - online

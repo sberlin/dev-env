@@ -2,10 +2,8 @@
 
 - name: install or update Zsh
   package:
-    name: "{{ item }}"
+    name: zsh
     state: latest
-  with_items:
-    - zsh
   tags:
     - packages
     - online
