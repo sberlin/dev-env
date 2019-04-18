@@ -11,6 +11,8 @@
 
 - name: install dlang
   shell: curl -fsS https://dlang.org/install.sh | bash -s dmd
+  args:
+    warn: false
   become: yes
   become_user: "{{ username }}"
   tags:
@@ -101,7 +103,7 @@
     name: onedrive
     enabled: yes
     state: started
-    user: yes
+    scope: user
   become: yes
   become_user: "{{ username }}"
   environment:

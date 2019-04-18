@@ -2,11 +2,8 @@
 
 - name: install or update Powerline and addons
   pip:
-    name: "{{ item }}"
+    name: ["powerline-status", "powerline-gitstatus"]
     state: latest
-  with_items:
-    - powerline-status
-    - powerline-gitstatus
   tags:
     - packages
     - online
