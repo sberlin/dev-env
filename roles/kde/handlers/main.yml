@@ -5,3 +5,7 @@
     name: kdm
     enabled: yes
     state: restarted
+
+- name: use GUI
+  shell: systemctl set-default graphical.target
+

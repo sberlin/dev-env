@@ -133,5 +133,6 @@
   shell: system-switch-displaymanager kdm
   notify:
     - restart KDE
+    - use GUI
   tags:
     - configs
