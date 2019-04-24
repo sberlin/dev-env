@@ -68,8 +68,8 @@ Vagrant.configure("2") do |config|
     vb.gui = vagrant_config["gui"]
     vb.name = vagrant_config["hostname"]
     vb.memory = "4096"
-    vb.cpus = "4"
-    vb.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
+    vb.cpus = "2"
+    vb.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     vb.customize ["modifyvm", :id, "--vram", "128"]
     vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
