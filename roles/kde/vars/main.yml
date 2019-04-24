@@ -27,6 +27,8 @@ konsole:
 
     - section: General
       options:
+        - key: Command
+          value: /usr/bin/bash -c "tmux attach || tmux"
         - key: Name
           value: custom
         - key: Parent
