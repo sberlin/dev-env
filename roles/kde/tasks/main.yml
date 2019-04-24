@@ -68,7 +68,23 @@
     group: "{{ username }}"
     mode: 0640
   with_subelements:
-    - "{{ konsole.profile }}"
+    - "{{ konsole.profiles.default }}"
+    - options
+  tags:
+    - configs
+
+- name: include fallback profile for konsole
+  ini_file:
+    path: /home/{{ username }}/.local/share/konsole/fallback.profile
+    section: "{{ item.0.section }}"
+    option: "{{ item.1.key }}"
+    value: "{{ item.1.value }}"
+    backup: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0640
+  with_subelements:
+    - "{{ konsole.profiles.fallback }}"
     - options
   tags:
     - configs

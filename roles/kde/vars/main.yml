@@ -17,36 +17,70 @@ kdeglobals:
         value: 189,195,199
 
 konsole:
-  profile:
-    - section: Appearance
-      options:
-        - key: ColorScheme
-          value: Solarized
-        - key: Font
-          value: Liberation Mono,11,-1,5,50,0,0,0,0,0,Regular
+  profiles:
+    default:
+      - section: Appearance
+        options:
+          - key: ColorScheme
+            value: Solarized
+          - key: Font
+            value: Liberation Mono,11,-1,5,50,0,0,0,0,0,Regular
 
-    - section: General
-      options:
-        - key: Command
-          value: /usr/bin/bash -c "tmux attach || tmux"
-        - key: Name
-          value: custom
-        - key: Parent
-          value: FALLBACK/
+      - section: General
+        options:
+          - key: Command
+            value: /usr/bin/bash -c "tmux attach || tmux"
+          - key: Name
+            value: custom
+          - key: Parent
+            value: FALLBACK/
 
-    - section: Interaction Options
-      options:
-        - key: AutoCopySelectedText
-          value: true
-        - key: OpenLinksByDirectClickEnabled
-          value: true
+      - section: Interaction Options
+        options:
+          - key: AutoCopySelectedText
+            value: true
+          - key: OpenLinksByDirectClickEnabled
+            value: true
 
-    - section: Scrolling
-      options:
-        - key: HistoryMode
-          value: 1
-        - key: ScrollBarPosition
-          value: 2
+      - section: Scrolling
+        options:
+          - key: HistoryMode
+            value: 1
+          - key: ScrollBarPosition
+            value: 2
+
+    fallback:
+      - section: Appearance
+        options:
+          - key: ColorScheme
+            value: Solarized
+          - key: Font
+            value: Liberation Mono,11,-1,5,50,0,0,0,0,0,Regular
+
+      - section: General
+        options:
+          - key: Command
+            value: /usr/bin/bash
+          - key: Name
+            value: fallback
+          - key: Parent
+            value: FALLBACK/
+
+      - section: Interaction Options
+        options:
+          - key: AutoCopySelectedText
+            value: true
+          - key: OpenLinksByDirectClickEnabled
+            value: true
+
+      - section: Scrolling
+        options:
+          - key: HistoryMode
+            value: 1
+          - key: HistorySize
+            value: 99999
+          - key: ScrollBarPosition
+            value: 1
 
   rc:
     - section: Desktop Entry
