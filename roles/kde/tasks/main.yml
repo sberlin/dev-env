@@ -22,6 +22,7 @@
   with_items:
     - /home/{{ username }}/.kde/share/config
     - /home/{{ username }}/.local/share/konsole
+    - /home/{{ username }}/.config
   tags:
     - directories
 
