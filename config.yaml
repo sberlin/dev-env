@@ -6,11 +6,14 @@ configs:
     gui: true
     basebox: "bento/ubuntu-17.10"
     hostname: "ubuntu-desktop"
+    username: "user"
   desktop:
     gui: true
     basebox: "generic/fedora29"
     hostname: "fedora-desktop"
+    username: "user"
   server:
     gui: false
     basebox: "generic/centos7"
     hostname: "centos-server"
+    username: "user"

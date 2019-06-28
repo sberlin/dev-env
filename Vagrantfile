@@ -87,7 +87,8 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "site.yml"
     ansible.extra_vars = {
       "hostname": vagrant_config["hostname"],
-      "password": "password"
+      "username": vagrant_config["username"],
+      "password": vagrant_config["username"]
     }
   end
 
