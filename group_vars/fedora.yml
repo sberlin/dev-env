@@ -6,6 +6,7 @@ package_groups:
   - "@System Tools"
 packages:
   - ansible
+  - firefox
   - glances
   - gradle
   - groovy
@@ -16,6 +17,7 @@ packages:
   - java-1.8.0-openjdk
   - jq
   - libselinux-python
+  - mozilla-ublock-origin
   - nmap
   - nodejs
   - npm
