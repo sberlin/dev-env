@@ -13,6 +13,8 @@
     - role: docker
       tags: [ docker ]
   vars_prompt:
+    - name: username
+      prompt: "Enter the desired username"
     - name: password
       prompt: "Enter the password to set for your user (omit to keep it)"
       confirm: yes

@@ -1,7 +1,5 @@
 ---
 
-username: sberlin
-
 packages:
   - ansible
   - glances
