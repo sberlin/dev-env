@@ -52,6 +52,7 @@
     url: "{{ item.browser_download_url }}"
     dest: /usr/local/bin/docker-compose
     mode: 0755
+    force: yes
   when: item.browser_download_url.endswith('Linux-x86_64')
   with_items: "{{ docker_compose_releases.json.assets }}"
   tags:
@@ -62,6 +63,8 @@
   get_url:
     url: "https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose"
     dest: /etc/bash_completion.d/docker-compose
+    mode: 0755
+    force: yes
   tags:
     - scripts
     - online
