@@ -9,7 +9,7 @@ configs:
     username: "user"
   desktop:
     gui: true
-    basebox: "generic/fedora29"
+    basebox: "generic/fedora33"
     hostname: "fedora-desktop"
     username: "user"
   server:
