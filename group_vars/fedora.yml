@@ -6,6 +6,7 @@ package_groups:
   - "@System Tools"
 packages:
   - ansible
+  - docker-compose
   - firefox
   - glances
   - hostname
@@ -19,6 +20,7 @@ packages:
   - nodejs
   - npm
   - openssl
+  - podman-docker
   - strace
   - xclip
   - xorg-x11-drv-synaptics-legacy
