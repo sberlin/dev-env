@@ -4,9 +4,8 @@
   package:
     name:
       - "{{ package_kde }}"
-      - kdm
+      - sddm
       - switchdesk
-      - system-switch-displaymanager
     state: latest
   tags:
     - packages
@@ -145,10 +144,16 @@
   tags:
     - configs
 
-- name: switch to KDM
-  shell: system-switch-displaymanager kdm
+- name: enable SDDM
+  systemd:
+    name: sddm
+    enabled: yes
+    state: started
+  when: ansible_service_mgr == 'systemd'
   notify:
-    - restart KDE
+    - restart DM
     - use GUI
   tags:
+    - service
+    - systemd
     - configs

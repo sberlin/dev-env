@@ -1,8 +1,8 @@
 ---
 
-- name: restart KDE
+- name: restart DM
   service:
-    name: kdm
+    name: sddm
     enabled: yes
     state: restarted
 
